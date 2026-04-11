@@ -73,12 +73,14 @@ O aplicativo busca facilitar:
 
 REQUISITOS FUNCIONAIS E NÃO FUNCIONAIS  
 
-[Link dos Requisitos](https://github.com/MuFerrari/ES2-Projeto-Dieta/blob/main/docs/Tabela%20Requisitos.md)
+[Link dos Requisitos Funcionais](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/requisitos/Requisitos%20Funcionais.md)
+
+[Link dos Requisitos Não Funcionais](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/requisitos/Requisitos%20N%C3%A3o%20Funcionais.md)
 
 ---
 
 # 📊 Caso de Uso
 
-[Link do Caso de Uso](https://github.com/MuFerrari/ES2-Projeto-Dieta/blob/main/docs/CasosDeUso-DietaFacil.png)
+[Link do Diagrama de Casos de Uso](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/CasosDeUso-DietaFacil/CasosDeUso-DietaFacil.png)
 
 ---
