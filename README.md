@@ -81,6 +81,6 @@ REQUISITOS FUNCIONAIS E NÃO FUNCIONAIS
 
 # 📊 Caso de Uso
 
-[Link do Diagrama de Casos de Uso](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/CasosDeUso-DietaFacil/CasosDeUso-DietaFacil.png)
+[Link do Diagrama de Casos de Uso](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/CasosDeUso/CasoDeUso-PlantUML.png)
 
 ---
