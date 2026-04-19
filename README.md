@@ -43,12 +43,11 @@ O aplicativo busca facilitar:
 - Visual Studio Code;
 - Android Studio;
 - IntelliJ IDEA;
-- draw.io.
 
 ### 🤖 Agentes de IA
 - Google Stitch;
 - ChatGPT;
-- emergent.
+- Emergent.
 
 ---
 
