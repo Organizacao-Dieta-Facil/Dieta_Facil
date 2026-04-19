@@ -1,14 +1,14 @@
 | ID   | Requisito Funcionais                                                                                       | Prioridade |
 | ---- | ---------------------------------------------------------------------------------------------------------- | ---------- |
-| RF01 | Permitir que o usuário configure uma meta de peso ao iniciar o aplicativo durante o first boot.                                 | Alta       |
-| RF02 | pedir informações pessoais durante o first boot, permitindo a edição caso tenha necessidade. (sexo, idade, altura, peso atual, peso meta e nível de atividade física). Tendo a Meta como opcional.       | Alta       |
-| RF03 | Calcular automaticamente a meta diária de consumo de calorias com base nos dados informados pelo usuário, caso a meta tenha sido configurada.  | Alta       |
-| RF04 | Permitir que o usuário acesse a tela principal de qualquer lugar do aplicativo.                                         | Alta       |
+| RF01 | Permitir que o usuário configure uma meta de peso ao iniciar o aplicativo durante o first boot.            | Alta       |
+| RF02 | pedir informações pessoais durante o first boot, permitindo a edição caso tenha necessidade. (sexo, idade, altura, peso atual, peso meta e nível de atividade física). Tendo a Meta como opcional.                                          | Alta       |
+| RF03 | Calcular automaticamente a meta diária de consumo de calorias com base nos dados informados pelo usuário, caso a meta tenha sido configurada.                                                                                                   | Alta       |
+| RF04 | Permitir que o usuário acesse a tela principal de qualquer lugar do aplicativo.                            | Alta       |
 | RF05 | Permitir a criação e organização de refeições no dia (ex.: café da manhã, almoço, café da tarde e jantar). | Alta       |
 | RF06 | Permitir adicionar novas refeições ou remover refeições existentes no cardápio diário.                     | Média      |
 | RF07 | Permitir adicionar alimentos a uma refeição específica.                                                    | Alta       |
 | RF08 | Permitir pesquisar alimentos por nome em um banco de dados.                                                | Alta       |
-| RF09| Permitir a inserção de alimentos no banco de dados local.                                                  | Alta       |
+| RF09 | Permitir a inserção de alimentos no banco de dados local.                                                  | Alta       |
 | RF10 | Permitir a remoção de alimentos no banco de dados local.                                                   | Alta       |
 | RF11 | Permitir a edição de alimentos no banco de dados local.                                                    | Alta       |
 | RF12 | Utilizar efeitos audiovisuais em casos de quebra de meta caso tenha meta.                                  | Alta       |
