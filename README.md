@@ -63,7 +63,7 @@ O aplicativo busca facilitar:
 
 ---
 
-# 🎨 Personas
+# 👥 Personas
 
 [Personas criadas no Canva](https://www.canva.com/design/DAHEQc0Vxik/Gd9rUqFoSZCpKgN4DhEZng/edit?utm_content=DAHEQc0Vxik&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
