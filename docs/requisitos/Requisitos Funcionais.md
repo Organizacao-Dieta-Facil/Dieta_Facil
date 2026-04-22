@@ -1,27 +1,24 @@
 | ID   | Requisito Funcionais                                                                                       | Prioridade |
 | ---- | ---------------------------------------------------------------------------------------------------------- | ---------- |
-| RF01 | Permitir que o usuário configure uma meta de peso ao iniciar o aplicativo durante o first boot.            | Alta       |
-| RF02 | pedir informações pessoais durante o first boot, permitindo a edição caso tenha necessidade. (sexo, idade, altura, peso atual, peso meta e nível de atividade física). Tendo a Meta como opcional.                                          | Alta       |
+| RF01 |Permitir que o usuário configure uma meta de consumo de calorias diário ao abrir o aplicativo pela primeira vez. Também deve ser possível criar/editar a meta através das opções do aplicativo | Alta       |
+| RF02 | Permitir que o usuário configure uma meta de consumo de calorias diário ao abrir o aplicativo pela primeira vez. Também deve ser possível criar/editar a meta através das opções do aplicativo | Alta       |
 | RF03 | Calcular automaticamente a meta diária de consumo de calorias com base nos dados informados pelo usuário, caso a meta tenha sido configurada.                                                                                                   | Alta       |
-| RF04 | Permitir que o usuário acesse a tela principal de qualquer lugar do aplicativo.                            | Alta       |
+| RF04 | Permitir que a tela inicial do aplicativo seja acessivel em qualquer outra tela do aplicativo. | Alta       |
 | RF05 | Permitir a criação e organização de refeições no dia (ex.: café da manhã, almoço, café da tarde e jantar). | Alta       |
 | RF06 | Permitir adicionar novas refeições ou remover refeições existentes no cardápio diário.                     | Média      |
-| RF07 | Permitir adicionar alimentos a uma refeição específica.                                                    | Alta       |
+| RF07 | Permitir que o usuário monte uma refeição, adicionando alimentos, editando a quantidade de alimentos adicionados, ou removendo-os da refeição.  | Alta       |
 | RF08 | Permitir pesquisar alimentos por nome em um banco de dados.                                                | Alta       |
-| RF09 | Permitir a inserção de alimentos no banco de dados local.                                                  | Alta       |
-| RF10 | Permitir a remoção de alimentos no banco de dados local.                                                   | Alta       |
-| RF11 | Permitir a edição de alimentos no banco de dados local.                                                    | Alta       |
-| RF12 | Utilizar efeitos audiovisuais em casos de quebra de meta caso tenha meta.                                  | Alta       |
-| RF13 | Exibir informações nutricionais detalhadas do alimento selecionado.                                        | Alta       |
-| RF14 | Permitir que o usuário informe a quantidade consumida do alimento (em gramas ou mililitros).               | Alta       |
-| RF15 | Calcular automaticamente as calorias e nutrientes com base na quantidade informada.                        | Alta       |
-| RF16 | Somar automaticamente os valores nutricionais de todos os alimentos adicionados às refeições do dia.       | Alta       |
-| RF17 | Exibir a soma total de calorias consumidas no dia.                                                         | Alta       |
-| RF18 | Exibir a meta diária de calorias ao lado do total consumido.                                               | Alta       |
-| RF19 | Permitir editar alimentos adicionados a uma refeição.                                                      | Média      |
-| RF20 | Permitir remover alimentos de uma refeição.                                                                | Média      |
-| RF21 | Permitir adicionar novos alimentos ao banco de dados caso não existam na busca.                            | Média      |
-| RF22 | Permitir salvar um cardápio diário.                                                                        | Média      |
-| RF23 | Permitir carregar um cardápio previamente salvo.                                                           | Média      |
-| RF24 | Permitir exportar o cardápio em formato PDF.                                                               | Baixa      |
-| RF25 | Permitir importar o cardápio em formato PDF.                                                               | Baixa     | 
+| RF09 | Exibir informações nutricionais detalhadas do alimento selecionado.                                        | Alta       |
+| RF10 | Permitir que o usuário informe a quantidade consumida do alimento (em gramas ou mililitros).               | Alta       |
+| RF11 | Calcular automaticamente as calorias e nutrientes com base na quantidade informada.                        | Alta       |
+| RF12 | Permitir que o usuário manipule um banco de dados próprio, adicionando novos alimentos, editando-os ou removendo-os.  | Alta       |
+| RF13 | Somar automaticamente os valores nutricionais de todos os alimentos adicionados às refeições do dia.       | Alta       |
+| RF14 | Exibir a soma total de calorias consumidas no dia.                                                         | Alta       |
+| RF15 | Exibir a meta diária de calorias ao lado do total consumido (somente caso a meta tenha sido informada pelo usuário).   | Alta       |
+| RF16 | Exibir aviso visuais caso a meta tiver sido estabelecida e for ultrapassada pelo cardápio do usuário, exibindo a soma das calorias em cor vermelha e um aviso próximo da soma informando que a meta foi ultrapassada.        | Alta       |
+| RF17 | Permitir salvar um cardápio diário.                                                                        | Média      |
+| RF18 | Permitir carregar um cardápio previamente salvo.                                                           | Média      |
+| RF19 | Permitir exportar o cardápio em formatos de arquivo como PDF, JSON, .txt, etc..    | Baixa      |
+| RF20 | Permitir importar o cardápio em formato de arquivo como PDF, JSON, .txt, etc..     | Baixa     | 
+| RF21 | Permitir pesquisar por cardápios prontos para o dia.  |Média|
+| RF22 | Permitir filtrar por categorias ou alimentos indesejados na busca de cardápios prontos. |Média|
