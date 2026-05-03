@@ -1,0 +1,74 @@
+@startuml
+
+class Usuario {
+  - sexo : String
+  - idade : int
+  - altura : double
+  - pesoAtual : double
+  - pesoMeta : double
+  - nivelAtividade : String
+  - metaCalorias : double
+  + calcularMetaCalorias() : double
+}
+
+class Cardapio {
+  - data : Date
+  - totalCalorias : double
+  + calcularTotais() : void
+  + exportarPDF() : void
+  + salvar() : void
+  + carregar() : void
+}
+
+class Refeicao {
+  - nome : String
+  + adicionarAlimento() : void
+  + removerAlimento() : void
+  + calcularNutrientes() : void
+}
+
+class Alimento {
+  - nome : String
+  - quantidadePadrao : float
+  - unidade : String
+  - valorEnergetico : float
+  - carboidratos : float
+  - proteinas : float
+  - gorduras : float
+  - gorduraSaturadas : float
+  - gordurasTrans : float
+  - fibras : float
+  - sodio : float
+  - acucares : float
+  - ePadrao : bool
+}
+
+class AlimentoConsumido {
+  - quantidadeSelecionada : float
+  + calcularNutrientesPorQtd() : void
+}
+
+class BancoAlimentos {
+  + buscarAlimento(nome : String) : List
+  + adicionarAlimento() : void
+  + editarAlimento() : void
+  + removerAlimento() : void
+}
+
+class CardapioPronto {
+  - categoria : String
+  - restricoes : String
+  + filtrar() : void
+}
+
+
+' Relacionamentos
+Usuario "0..1" -- "0..*" Cardapio
+Cardapio o-- "0..*" Refeicao
+Refeicao o-- "0..*" AlimentoConsumido
+AlimentoConsumido --> "1..1" Alimento
+BancoAlimentos o-- "0..*" Alimento
+CardapioPronto --|> Cardapio
+CardapioPronto "0..*" -- "0..1" Cardapio
+
+@enduml
