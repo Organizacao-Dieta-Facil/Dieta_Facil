@@ -16,6 +16,9 @@ rectangle "Sistema de Cardapio" {
   usecase "Excluir Refeição" as UC10
   usecase "Pesquisar Alimentos" as UC11
   usecase "Adicionar Alimento" as UC12
+  usecase "Editar Alimento" as UC13
+  usecase "Excluir Alimento" as UC14
+  usecase "Cadastrar Novo Alimento" as UC15
 }
 
 UC1 ..> UC2 : <<include>>
@@ -26,12 +29,14 @@ UC7 ..> UC3 : <<extend>>
 UC8 ..> UC7 : <<extend>>
 UC9 ..> UC7 : <<extend>>
 UC10 ..> UC7 : <<extend>>
-UC8 ..> UC11 : <<include>>
-UC9 ..> UC11 : <<extend>>
-UC12 ..> UC11 : <<extend>>
+UC12 ..> UC8 : <<extend>>
+UC12 ..> UC9 : <<extend>>
+UC11 ..> UC12 : <<extend>>
+UC13 ..> UC9 : <<extend>>
+UC14 ..> UC9 : <<extend>>
+UC15 ..> UC12: <<extend>>
 
 Usuario --> UC1
 Usuario --> UC3
-Usuario --> UC11
 
 @enduml
