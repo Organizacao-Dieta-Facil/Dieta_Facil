@@ -65,13 +65,11 @@ O aplicativo busca facilitar:
 
 # 👥 Personas
 
-[Personas criadas no Canva](https://www.canva.com/design/DAHEQc0Vxik/Gd9rUqFoSZCpKgN4DhEZng/edit?utm_content=DAHEQc0Vxik&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+[Link das Personas no Canva](https://www.canva.com/design/DAHEQc0Vxik/Gd9rUqFoSZCpKgN4DhEZng/edit?utm_content=DAHEQc0Vxik&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 ---
 
 # 📋 Requisitos do Sistema
-
-REQUISITOS FUNCIONAIS E NÃO FUNCIONAIS  
 
 [Link dos Requisitos Funcionais](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/requisitos/Requisitos%20Funcionais.md)
 
@@ -88,3 +86,11 @@ REQUISITOS FUNCIONAIS E NÃO FUNCIONAIS
 # 📐 Diagrama de Classes
 
 [Link do Diagrama de Classes](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/DiagramaClasses/class-diagram.png)
+
+---
+
+# 📱 Protótipo Parcial
+
+[Link do Protótipo Parcial no Google Stitch](https://stitch.withgoogle.com/preview/14107004734553997785?node-id=11c1ab9bb3944d03b1d754014fe01c5d)
+
+---
