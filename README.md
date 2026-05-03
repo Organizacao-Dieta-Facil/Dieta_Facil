@@ -79,7 +79,7 @@ O aplicativo busca facilitar:
 
 # 📊 Diagrama de Casos de Uso
 
-[Link do Diagrama de Casos de Uso](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/CasosDeUso/CasoDeUso-PlantUML.png)
+[Link do Diagrama de Casos de Uso](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/CasosDeUso/DiagramaCasosUso.png)
 
 ---
 
