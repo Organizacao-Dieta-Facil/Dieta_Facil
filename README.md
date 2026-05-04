@@ -92,9 +92,15 @@ O aplicativo busca facilitar:
 
 
 ---
+
 # 📐 Diagrama de Classes
 
 [Link do Diagrama de Classes](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/DiagramaClasses/class-diagram.png)
 
+---
+
+# 🎥 Vídeo Parcial
+
+[Link do Vídeo Parcial no Youtube](https://www.youtube.com/watch?v=JwESGFhHSp4)
 
 ---
