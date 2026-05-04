@@ -59,7 +59,7 @@ O aplicativo busca facilitar:
 
 | <img src="https://github.com/AlfredAlbach.png" width="200px"> | <img src="https://github.com/cesar-augusto76.png" width="200px"> | <img src="https://github.com/miealt.png" width="200px"> | <img src="https://github.com/HugoIorio.png" width="200px"> | <img src="https://github.com/MuFerrari.png" width="200px"> |
 |:--:|:--:|:--:|:--:|:--:|
-| **[Alfred Domke](https://github.com/AlfredAlbach)** | **[César Guzman](https://github.com/cesar-augusto76)** | **[Davi Guo](https://github.com/miealt)** | **[Hugo Iorio](https://github.com/HugoIorio)** | **[Murilo Ferrari](https://github.com/MuFerrari)** |
+| **[Alfred Domke](https://github.com/AlfredAlbach)** | **[César Guzmán](https://github.com/cesar-augusto76)** | **[Davi Guo](https://github.com/miealt)** | **[Hugo Iorio](https://github.com/HugoIorio)** | **[Murilo Ferrari](https://github.com/MuFerrari)** |
 
 ---
 
@@ -84,13 +84,9 @@ O aplicativo busca facilitar:
 ---
 # 📱 Protótipo Parcial
 
-<div align= “center“>
+| ;---; | ;---; | ;---; |
   
-<img width="250" height="600" alt="Screenshot 2026-05-03 at 22-17-40 Stitch - Preview" src="https://github.com/user-attachments/assets/bc3d2f11-c1f7-45b5-bec9-c9cd04b7b36a" /> 
-<img width="250" height="600" alt="Screenshot 2026-05-03 at 22-20-10 Stitch - Preview" src="https://github.com/user-attachments/assets/e18e67c5-973b-40af-b578-70e3bf9bcf67" />
-<img width="250" height="600" alt="Screenshot 2026-05-03 at 22-25-37 Stitch - Preview" src="https://github.com/user-attachments/assets/e78756f5-9273-4ffc-add3-653ccccba27a" />
-
-</div>
+|<img width="250" height="600" alt="Screenshot 2026-05-03 at 22-17-40 Stitch - Preview" src="https://github.com/user-attachments/assets/bc3d2f11-c1f7-45b5-bec9-c9cd04b7b36a" />  |<img width="250" height="600" alt="Screenshot 2026-05-03 at 22-20-10 Stitch - Preview" src="https://github.com/user-attachments/assets/e18e67c5-973b-40af-b578-70e3bf9bcf67" /> | <img width="250" height="600" alt="Screenshot 2026-05-03 at 22-25-37 Stitch - Preview" src="https://github.com/user-attachments/assets/e78756f5-9273-4ffc-add3-653ccccba27a" />
 
 [Link do Protótipo Parcial no Google Stitch](https://stitch.withgoogle.com/preview/14107004734553997785?node-id=11c1ab9bb3944d03b1d754014fe01c5d)
 
