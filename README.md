@@ -84,9 +84,9 @@ O aplicativo busca facilitar:
 ---
 # 📱 Protótipo Parcial
 
-<img width="300" height="300" alt="Screenshot 2026-05-03 at 22-17-40 Stitch - Preview" src="https://github.com/user-attachments/assets/bc3d2f11-c1f7-45b5-bec9-c9cd04b7b36a" /> 
-<img width="300" height="300" alt="Screenshot 2026-05-03 at 22-20-10 Stitch - Preview" src="https://github.com/user-attachments/assets/e18e67c5-973b-40af-b578-70e3bf9bcf67" />
-<img width="300" height="300" alt="Screenshot 2026-05-03 at 22-25-37 Stitch - Preview" src="https://github.com/user-attachments/assets/e78756f5-9273-4ffc-add3-653ccccba27a" />
+<img width="500" height="500" alt="Screenshot 2026-05-03 at 22-17-40 Stitch - Preview" src="https://github.com/user-attachments/assets/bc3d2f11-c1f7-45b5-bec9-c9cd04b7b36a" /> 
+<img width="500" height="500" alt="Screenshot 2026-05-03 at 22-20-10 Stitch - Preview" src="https://github.com/user-attachments/assets/e18e67c5-973b-40af-b578-70e3bf9bcf67" />
+<img width="500" height="500" alt="Screenshot 2026-05-03 at 22-25-37 Stitch - Preview" src="https://github.com/user-attachments/assets/e78756f5-9273-4ffc-add3-653ccccba27a" />
 
 
 
