@@ -91,6 +91,9 @@ O aplicativo busca facilitar:
 
 # 📱 Protótipo Parcial
 
+<img width="429" height="924" alt="Screenshot 2026-05-03 at 22-17-40 Stitch - Preview" src="https://github.com/user-attachments/assets/bc3d2f11-c1f7-45b5-bec9-c9cd04b7b36a" />
+
+
 [Link do Protótipo Parcial no Google Stitch](https://stitch.withgoogle.com/preview/14107004734553997785?node-id=11c1ab9bb3944d03b1d754014fe01c5d)
 
 ---
