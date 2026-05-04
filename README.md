@@ -82,21 +82,19 @@ O aplicativo busca facilitar:
 [Link do Diagrama de Casos de Uso](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/CasosDeUso/DiagramaCasosUso.png)
 
 ---
-
-# 📐 Diagrama de Classes
-
-[Link do Diagrama de Classes](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/DiagramaClasses/class-diagram.png)
-
----
-
 # 📱 Protótipo Parcial
 
-<img width="429" height="924" alt="Screenshot 2026-05-03 at 22-17-40 Stitch - Preview" src="https://github.com/user-attachments/assets/bc3d2f11-c1f7-45b5-bec9-c9cd04b7b36a" />
-
-<img width="435" height="927" alt="Screenshot 2026-05-03 at 22-20-10 Stitch - Preview" src="https://github.com/user-attachments/assets/e18e67c5-973b-40af-b578-70e3bf9bcf67" />
+<img width="429" height="924" alt="Screenshot 2026-05-03 at 22-17-40 Stitch - Preview" src="https://github.com/user-attachments/assets/bc3d2f11-c1f7-45b5-bec9-c9cd04b7b36a" /> <img width="435" height="927" alt="Screenshot 2026-05-03 at 22-20-10 Stitch - Preview" src="https://github.com/user-attachments/assets/e18e67c5-973b-40af-b578-70e3bf9bcf67" />
 
 
 
 [Link do Protótipo Parcial no Google Stitch](https://stitch.withgoogle.com/preview/14107004734553997785?node-id=11c1ab9bb3944d03b1d754014fe01c5d)
+
+
+---
+# 📐 Diagrama de Classes
+
+[Link do Diagrama de Classes](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/DiagramaClasses/class-diagram.png)
+
 
 ---
