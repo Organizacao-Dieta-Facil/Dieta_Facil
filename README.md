@@ -1,22 +1,32 @@
-# 🥗 Dieta Fácil
+<div align="center">
+  <h1>DIETA FÁCIL</h1>
+</div>
 
-Aplicação com foco na **criação e organização de cardápios diários**, com um banco de dados contendo informações nutricionais de diversos alimentos e nutrientes.
+<table align="center" border="0">
+  <tr>
+    <td width="70%" align="left">
+      <p>Aplicação com foco na <b>Criação, Organização e Obtenção de cardápios</b>. <br> Consultando o Banco de Dados contendo informações nutricionais de diversos alimentos e nutrientes.</p>
+    </td>
+    <td width="30%" align="center">
+      <img src="docs/Logo/Logo Vetorizada.svg" alt="Logo Dieta Fácil" width="120">
+    </td>
+  </tr>
+</table>
+
+<hr>
 
 ---
 
-# 📌 Sobre o Projeto
+  
+## 📌 O aplicativo Busca Facilitar:
 
-## 📖 Resumo
-O **Dieta Fácil** é uma aplicação desenvolvida para auxiliar usuários e profissionais da área da saúde a organizar cardápios diários de forma simples e prática, utilizando dados nutricionais confiáveis.
-
-O aplicativo busca facilitar:
-- A criação de cardápios saudáveis;
-- O acompanhamento nutricional;
-- A organização alimentar diária.
+  - A criação de cardápios saudáveis;
+  - O acompanhamento nutricional;
+  - A organização alimentar diária.
 
 ---
 
-# 👥 Atores / Personas
+### 👥 Atores / Personas
 
 - Usuários com rotinas saudáveis que desejam evoluir e diversificar o cardápio;
 - Usuários casuais que querem apenas manter o peso ou melhorar hábitos alimentares;
@@ -25,7 +35,7 @@ O aplicativo busca facilitar:
 
 ---
 
-# 🩹 Principais Dores
+### 🩹 Principais Dores
 
 - Dificuldade em controlar a dieta (ganhar ou perder peso);
 - Dificuldade em encontrar cardápios compatíveis com suas necessidades;
@@ -33,7 +43,7 @@ O aplicativo busca facilitar:
 
 ---
 
-# 🛠️ Tecnologias Utilizadas
+## 🛠️ Tecnologias Utilizadas
 
 ### 💻 Desenvolvimento
 - **Backend:** Kotlin; 
@@ -51,11 +61,11 @@ O aplicativo busca facilitar:
 
 ---
 
-# 👨‍💻 Equipe do Projeto
+## 👨‍💻 Equipe do Projeto
 
 > Toda a equipe do projeto é responsável pelo desenvolvimento.
 
-## Integrantes
+### Integrantes
 
 | <img src="https://github.com/AlfredAlbach.png" width="200px"> | <img src="https://github.com/cesar-augusto76.png" width="200px"> | <img src="https://github.com/miealt.png" width="200px"> | <img src="https://github.com/HugoIorio.png" width="200px"> | <img src="https://github.com/MuFerrari.png" width="200px"> |
 |:--:|:--:|:--:|:--:|:--:|
@@ -63,13 +73,13 @@ O aplicativo busca facilitar:
 
 ---
 
-# 👥 Personas
+## 👥 Personas
 
 [Link das Personas no Canva](https://www.canva.com/design/DAHEQc0Vxik/Gd9rUqFoSZCpKgN4DhEZng/edit?utm_content=DAHEQc0Vxik&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 ---
 
-# 📋 Requisitos do Sistema
+## 📋 Requisitos do Sistema
 
 [Link dos Requisitos Funcionais](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/requisitos/Requisitos%20Funcionais.md)
 
@@ -77,12 +87,12 @@ O aplicativo busca facilitar:
 
 ---
 
-# 📊 Diagrama de Casos de Uso
+## 📊 Diagrama de Casos de Uso
 
 [Link do Diagrama de Casos de Uso](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/CasosDeUso/DiagramaCasosUso.png)
 
 ---
-# 📱 Protótipo Parcial
+## 📱 Protótipo Parcial
 
 | Tela 1 | Tela 2 | Tela 3 |
 | :---: | :---: | :---: |
@@ -93,13 +103,13 @@ O aplicativo busca facilitar:
 
 ---
 
-# 📐 Diagrama de Classes
+## 📐 Diagrama de Classes
 
 [Link do Diagrama de Classes](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/DiagramaClasses/class-diagram.png)
 
 ---
 
-# 🎥 Vídeo Parcial
+## 🎥 Vídeo Parcial
 
 [Link do Vídeo Parcial no Youtube](https://www.youtube.com/watch?v=JwESGFhHSp4)
 
