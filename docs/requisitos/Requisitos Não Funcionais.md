@@ -7,4 +7,4 @@
 | RNF05 | O aplicativo deve funcionar em dispositivos Android compatíveis com a versão mínima Android 9.                       | Portabilidade | Alta       |
 | RNF06 | O sistema deve manter os cardápios salvos disponíveis mesmo após o fechamento do aplicativo.                         | Confiabilidade  | Alta       |
 | RNF07 | O aplicativo deve garantir que o processo de exportação para PDF seja concluído sem perda de dados.                  | Confiabilidade  | Média      |
-| RNF08 | O sistema deve operar sem necessidade de conexão com internet (salvo para atualizações).                             | Disponibilidade | Alta       |
+| RNF08 | O sistema deve operar tanto online quanto offline (banco de dados local e banco de dados na nuvem).                             | Disponibilidade | Alta       |
