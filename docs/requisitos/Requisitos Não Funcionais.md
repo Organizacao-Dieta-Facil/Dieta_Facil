@@ -8,5 +8,5 @@
 | RNF06 | O sistema deve manter os cardápios salvos disponíveis mesmo após o fechamento do aplicativo.                         | Confiabilidade  | Alta       |
 | RNF07 | O aplicativo deve garantir que o processo de exportação para PDF seja concluído sem perda de dados.                  | Confiabilidade  | Média      |
 | RNF08 | O sistema deve operar tanto online quanto offline (banco de dados local e banco de dados na nuvem).                             | Disponibilidade | Alta       |
-| RNFNOVO | O sistema deve garantir segurança entre os bancos de dados e o aplicativo através de protocolos como HTTPS/TLS.             | Segurança | Alta    |
-| RNFNOVO | O sistema deve sincronizar os dados com a nuvem assim que for detectada uma conexão com a internet, sem intervenção do usuário.      | Confiabilidade  |  Alta      |
+| RNF09 | O sistema deve garantir segurança entre os bancos de dados e o aplicativo através de protocolos como HTTPS/TLS.             | Segurança | Alta    |
+| RNF10 | O sistema deve sincronizar os dados com a nuvem assim que for detectada uma conexão com a internet, sem intervenção do usuário.      | Confiabilidade  |  Alta      |
