@@ -1,42 +1,92 @@
 @startuml
+
 left to right direction
 
-actor "Usuário" as Usuario
+actor "Usuário Comum" as UsuarioComum
+actor "Nutricionista" as Nutricionista
 
-rectangle "Sistema de Cardapio" {
-  usecase "Definir Meta" as UC1
-  usecase "Preencher Informações" as UC2
-  usecase "Consultar Cardápio" as UC3
-  usecase "Salvar Cardápio" as UC4
-  usecase "Exportar como PDF" as UC5
-  usecase "Importar Cardápio" as UC6
-  usecase "Editar Cardápio" as UC7
-  usecase "Adicionar Refeição" as UC8
-  usecase "Editar Refeição" as UC9
-  usecase "Excluir Refeição" as UC10
-  usecase "Pesquisar Alimentos" as UC11
-  usecase "Adicionar Alimento" as UC12
-  usecase "Editar Alimento" as UC13
-  usecase "Excluir Alimento" as UC14
-  usecase "Cadastrar Novo Alimento" as UC15
+rectangle "Sistema" {
+    package "Cadastro" {
+        usecase "Cadastrar Conta" as Register
+        usecase "Realizar Login" as Login
+    }
+
+    Cadastro -[hidden]down-> Metas
+    Metas -[hidden]down-> Cardapios
+    Cardapios -[hidden]down-> Interacao
+    Interacao -[hidden]down-> AcoesNutri
+
+    package "Metas" {
+        usecase "Definir Meta" as DefMeta
+        usecase "Editar Meta" as EditMeta
+    }
+
+    package "Cardápios e Refeições" as Cardapios {
+        usecase "Consultar Cardápio" as CheckMenu
+        usecase "Gerenciar Cardápio" as EditMenu
+        usecase "Registrar Alimentos Consumidos" as RegMeal
+        usecase "Verificar Histórico" as CheckHist
+        usecase "Salvar Cardápio" as SaveMenu
+        usecase "Navegar Cardápios" as ListMenu
+        usecase "Carregar Cardápio" as LoadMenu
+        usecase "Pesquisar Alimentos" as SearchFood
+        usecase "Cadastrar Novos Alimentos" as AddNewFood
+    }
+
+    package "Interação com Nutricionista" as Interacao {
+        usecase "Pesquisar Nutricionistas" as SearchNutr
+        usecase "Agendar Consulta" as SchedCheckup
+        usecase "Avaliar Nutricionistas" as ReviewNutr
+        usecase "Chat com Nutricionista" as ChatNutr
+    }
+
+    package "Ações do Nutricionista" as AcoesNutri {
+        usecase "Vincular Pacientes" as AddPati
+        usecase "Remover Pacientes" as DelePati
+        usecase "Gerenciar Agenda" as ManageAgenda
+        usecase "Verificar Histórico de Pacientes" as CheckPatiHist
+        usecase "Verificar Informações dos Pacientes" as CheckPatiInfo
+        usecase "Prescrever Cardápios a Pacientes" as PrescribeMenu
+        usecase "Editar Cardápios de Pacientes" as EditPatiMenu
+        usecase "Chat com Paciente" as ChatPati
+    }
 }
 
-UC1 ..> UC2 : <<include>>
-UC4 ..> UC3 : <<extend>>
-UC5 ..> UC3 : <<extend>>
-UC6 ..> UC3 : <<extend>>
-UC7 ..> UC3 : <<extend>>
-UC8 ..> UC7 : <<extend>>
-UC9 ..> UC7 : <<extend>>
-UC10 ..> UC7 : <<extend>>
-UC12 ..> UC8 : <<extend>>
-UC12 ..> UC9 : <<extend>>
-UC11 ..> UC12 : <<extend>>
-UC13 ..> UC9 : <<extend>>
-UC14 ..> UC9 : <<extend>>
-UC15 ..> UC12: <<extend>>
+' --- ASSOCIAÇÕES DO USUÁRIO COMUM (Esquerda para a Direita) ---
 
-Usuario --> UC1
-Usuario --> UC3
+UsuarioComum --> Register
+UsuarioComum --> Login
+UsuarioComum --> DefMeta
+UsuarioComum --> EditMeta
+UsuarioComum --> CheckMenu
+UsuarioComum --> EditMenu
+UsuarioComum --> RegMeal
+UsuarioComum --> CheckHist
+UsuarioComum --> SaveMenu
+UsuarioComum --> ListMenu
+UsuarioComum --> LoadMenu
+UsuarioComum --> SearchFood
+UsuarioComum --> AddNewFood
+UsuarioComum --> SearchNutr
+UsuarioComum --> SchedCheckup
+UsuarioComum --> ReviewNutr
+UsuarioComum --> ChatNutr
+
+' --- ASSOCIAÇÕES DO NUTRICIONISTA (Direita para a Esquerda) ---
+Register <-- Nutricionista
+Login <-- Nutricionista
+AddPati <-- Nutricionista
+DelePati <-- Nutricionista
+ManageAgenda <-- Nutricionista
+CheckPatiHist <-- Nutricionista
+CheckPatiInfo <-- Nutricionista
+PrescribeMenu <-- Nutricionista
+EditPatiMenu <-- Nutricionista
+ChatPati <-- Nutricionista
+
+' --- RELACIONAMENTOS DE EXTENSÃO (Internos) ---
+EditMenu <-right-. SearchFood : <<extend>>
+RegMeal <-right-. SearchFood : <<extend>>
+EditPatiMenu <-left-. SearchFood  : <<extend>>
 
 @enduml
