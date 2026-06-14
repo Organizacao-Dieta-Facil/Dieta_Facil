@@ -31,4 +31,4 @@
 | RF29 | Ecossistema Nutri e Chat | Permitir que um usuário encontre outro dentro do sistema através da busca pelo nome de usuário único para iniciar um chat. | Alta |
 | RF30 | Ecossistema Nutri e Chat | Permitir que o usuário `nutricionista` acesse e visualize o histórico/logs de consumo diário de todos os seus clientes vinculados. | Alta |
 | RF31 | Exportação de Dados | Permitir a exportação do cardápio do usuário em formatos externos de arquivos (como PDF, JSON ou TXT). | Baixa |
-| RF32 | Ecossitema Nutri e Chat | Ter um placar de acompanhamento para monstar quantas pessoas também esta seguindo sua dieta. | Baixa |
+| RF32 | Ecossitema Nutri e Chat | Ter um placar de acompanhamento para mostrar quantas pessoas também esta seguindo sua dieta. | Baixa |
