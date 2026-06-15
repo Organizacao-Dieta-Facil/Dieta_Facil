@@ -105,7 +105,7 @@
 
 ## 📐 Diagrama de Classes
 
-[Link do Diagrama de Classes](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/DiagramaClasses/class-diagram.png)
+[Link do Diagrama de Classes](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/DiagramaClasses/DiagramaDeClasses2.0.png)
 
 ---
 
