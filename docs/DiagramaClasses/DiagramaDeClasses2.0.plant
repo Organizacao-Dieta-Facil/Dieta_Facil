@@ -12,7 +12,7 @@ abstract class Usuario {
 class UsuarioComum {
 -double altura
 -double pesoAtual
--int nivelAtividade
+-char sexo
 }
 
 class Nutricionista {
@@ -23,17 +23,22 @@ class Nutricionista {
 
 class Meta {
 -int nivelAtividade
--char sexo
 -double pesoMeta
 -double caloriasObjetivo
 }
 
 class Cardapio {
--double totalCalorias
+-String nomeCardapio
+-double totlCalorias
+-double totalCarboidratos
+-double totalProteinas
+-double totalGorduras
+-double totalFibras
+-double totalSodio
 }
 
 class Registro {
--double totalValorEnergetico
+-double totlCalorias
 -double totalCarboidratos
 -double totalProteinas
 -double totalGorduras
@@ -87,9 +92,9 @@ Usuario <|-- UsuarioComum
 Usuario <|-- Nutricionista
 
 ' Relacionamentos do Usuário Comum (Meta como 0..1 - Opcional)
-UsuarioComum "1" --> "*" Meta
-UsuarioComum "1" --> "1" Cardapio
-UsuarioComum "1" --> "1" Registro
+UsuarioComum "1" --> "1" Meta
+UsuarioComum "1" --> "*" Cardapio
+UsuarioComum "1" --> "*" Registro
 
 ' Estrutura de Alimentação
 Cardapio "1" o-- "*" Refeicao
