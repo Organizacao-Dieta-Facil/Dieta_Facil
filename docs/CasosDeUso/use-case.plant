@@ -13,8 +13,14 @@ rectangle "Sistema" {
 
     Cadastro -[hidden]down-> Metas
     Metas -[hidden]down-> Cardapios
+    Metas -[hidden]up-> Configuracoes
     Cardapios -[hidden]down-> Interacao
     Interacao -[hidden]down-> AcoesNutri
+
+    package "Configuracoes" {
+        usecase "Gerenciar Privacidade" as ManagePrivacy
+        usecase "Redefinir Meta" as RedefMeta
+    }
 
     package "Metas" {
         usecase "Definir Meta" as DefMeta
@@ -57,7 +63,6 @@ rectangle "Sistema" {
 UsuarioComum --> Register
 UsuarioComum --> Login
 UsuarioComum --> DefMeta
-UsuarioComum --> EditMeta
 UsuarioComum --> CheckMenu
 UsuarioComum --> EditMenu
 UsuarioComum --> RegMeal
@@ -71,6 +76,8 @@ UsuarioComum --> SearchNutr
 UsuarioComum --> SchedCheckup
 UsuarioComum --> ReviewNutr
 UsuarioComum --> ChatNutr
+UsuarioComum --> RedefMeta
+UsuarioComum --> ManagePrivacy
 
 ' --- ASSOCIAÇÕES DO NUTRICIONISTA (Direita para a Esquerda) ---
 Register <-- Nutricionista
@@ -83,10 +90,12 @@ CheckPatiInfo <-- Nutricionista
 PrescribeMenu <-- Nutricionista
 EditPatiMenu <-- Nutricionista
 ChatPati <-- Nutricionista
+ManagePrivacy <-- Nutricionista
+EditMeta <-- Nutricionista
 
 ' --- RELACIONAMENTOS DE EXTENSÃO (Internos) ---
 EditMenu <-right-. SearchFood : <<extend>>
 RegMeal <-right-. SearchFood : <<extend>>
 EditPatiMenu <-left-. SearchFood  : <<extend>>
 
-@enduml
+@enduml 
