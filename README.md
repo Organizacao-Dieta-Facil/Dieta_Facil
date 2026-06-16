@@ -109,6 +109,18 @@
 
 ---
 
+## 📄 Documento de Visão
+
+[Link do DOCUMENTO DE VISÃO](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/DocumentoVisao/Documento%20de%20Vis%C3%A3o.pdf)
+
+---
+
+## Proposta de Projeto Integrador 
+
+[Link da Proposta de PI](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/PropostaProjetoIntegrador/Proposta%20de%20Projeto%20Integrador%20.pdf)
+
+---
+
 ## 🎥 Vídeo Parcial
 
 [Link do Vídeo Parcial no Youtube](https://www.youtube.com/watch?v=JwESGFhHSp4)
