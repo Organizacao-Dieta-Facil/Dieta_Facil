@@ -2,85 +2,94 @@
 top to bottom direction
 
 abstract class Usuario {
-    -String nome
-    -String email
-    -String senha
-    -char genero
-    -Image fotoPerfil
+-String nome
+-String email
+-String senha
+-char genero
+-Image fotoPerfil
 }
 
 class UsuarioComum {
-    -double altura
-    -double pesoAtual
-    -int nivelAtividade
+-double altura
+-double pesoAtual
+-int nivelAtividade
 }
 
 class Nutricionista {
-    -String CRN
-    -String Endereco
+-String CRN
+-String Endereco
+-String Descricao
 }
 
 class Meta {
-    -double altura
-    -double pesoAtual
-    -int nivelAtividade
-    -String sexo
-    -double pesoMeta
-    -double caloriasObjetivo
+-int nivelAtividade
+-char sexo
+-double pesoMeta
+-double caloriasObjetivo
 }
 
 class Cardapio {
-    -double totalCalorias
+-double totalCalorias
 }
 
 class Registro {
-    -double totalCalorias
-    -Date diaRegistrado
+-double totalValorEnergetico
+-double totalCarboidratos
+-double totalProteinas
+-double totalGorduras
+-double totalFibras
+-double totalSodio
+-double totalAgua
+-Date diaRegistrado
 }
 
 class Refeicao {
-    -String nome
+-String nome
 }
 
 class AlimentoConsumido {
-    -double quantidadeSelecionada
+-double quantidadeSelecionada
 }
 
 class Alimento {
-    -String nome
-    -double quantidadePadrao
-    -String unidade
-    -double valorEnergetico
-    -double carboidratos
-    -double proteinas
-    -double gorduras
-    -double fibras
-    -double sodio
+-String nome
+-double quantidadePadrao
+-String unidade
+-double valorEnergetico
+-double carboidratos
+-double proteinas
+-double gorduras
+-double fibras
+-double sodio
 }
 
 class Consulta {
-    -DateTime dataHorario
-    -String status
+-DateTime dataHorario
+-String status
 }
 
 class Avaliacao {
-    -int nota
-    -String comentario
+-int nota
+-String comentario
 }
 
 class VinculoPaciente {
-    -Date dataInicio
-    -boolean ativo
+-Date dataInicio
+-boolean ativo
 }
 
+class Mensagens {
+-String conteudo
+-DateTime horario
+}
 ' Herança
 Usuario <|-- UsuarioComum
 Usuario <|-- Nutricionista
 
 ' Relacionamentos do Usuário Comum (Meta como 0..1 - Opcional)
-UsuarioComum "1" --> "0" Meta
-UsuarioComum "1" --> "*" Cardapio
-UsuarioComum "1" --> "*" Registro
+UsuarioComum "1" --> "*" Meta
+UsuarioComum "1" --> "1" Cardapio
+UsuarioComum "1" --> "1" Registro
 
 ' Estrutura de Alimentação
 Cardapio "1" o-- "*" Refeicao
@@ -97,6 +106,7 @@ UsuarioComum "1" <-- "*" VinculoPaciente
 
 ' Consultas e Avaliações vinculadas à relação profissional
 VinculoPaciente "1" --> "*" Consulta
-VinculoPaciente "1" --> "*" Avaliacao
+VinculoPaciente "1" --> "1" Avaliacao
+VinculoPaciente "1" --> "*" Mensagens
 
 @enduml
