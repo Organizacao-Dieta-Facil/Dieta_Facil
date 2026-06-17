@@ -28,6 +28,7 @@ rectangle "Sistema" {
     }
 
     package "Cardápios e Refeições" as Cardapios {
+usecase "Gerenciar Refeicoes" as ManageMeal
         usecase "Consultar Cardápio" as CheckMenu
         usecase "Gerenciar Cardápio" as EditMenu
         usecase "Registrar Alimentos Consumidos" as RegMeal
@@ -94,8 +95,9 @@ ManagePrivacy <-- Nutricionista
 EditMeta <-- Nutricionista
 
 ' --- RELACIONAMENTOS DE EXTENSÃO (Internos) ---
-EditMenu <-right-. SearchFood : <<extend>>
-RegMeal <-right-. SearchFood : <<extend>>
-EditPatiMenu <-left-. SearchFood  : <<extend>>
+EditMenu <-right-. ManageMeal : <<extend>>
+RegMeal <-right-. ManageMeal : <<extend>>
+EditPatiMenu <-left-. ManageMeal  : <<extend>>
+PrescribeMenu <-left-. ManageMeal  : <<extend>>
 
 @enduml 
