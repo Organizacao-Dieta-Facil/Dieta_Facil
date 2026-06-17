@@ -126,3 +126,13 @@
 [Link do Vídeo Parcial no Youtube](https://www.youtube.com/watch?v=JwESGFhHSp4)
 
 ---
+
+### Entrevista com Especialista
+
+[Link da Entrevista com o Nutricionista](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/EntrevistaNutricionista/Entrevista%20com%20Nutricionista.pdf)
+
+---
+
+## RELATÓRIO FINAL
+
+[Link do RELATÓRIO FINAL](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/RelatorioFinal/RELAT%C3%93RIO%20FINAL%20DIETA%20F%C3%81CIL.pdf)
