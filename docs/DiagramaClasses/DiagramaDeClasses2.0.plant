@@ -29,7 +29,7 @@ class Meta {
 
 class Cardapio {
 -String nomeCardapio
--double totlCalorias
+-double totalCalorias
 -double totalCarboidratos
 -double totalProteinas
 -double totalGorduras
@@ -38,7 +38,7 @@ class Cardapio {
 }
 
 class Registro {
--double totlCalorias
+-double totalCalorias
 -double totalCarboidratos
 -double totalProteinas
 -double totalGorduras
@@ -50,6 +50,7 @@ class Registro {
 
 class Refeicao {
 -String nome
+-DateTime horario
 }
 
 class AlimentoConsumido {
@@ -87,6 +88,11 @@ class Mensagens {
 -String conteudo
 -DateTime horario
 }
+class Agenda {
+-DateTime horarioInicioAtendimento
+-DateTime horarioFimAtendimento
+}
+
 ' Herança
 Usuario <|-- UsuarioComum
 Usuario <|-- Nutricionista
@@ -108,9 +114,10 @@ Nutricionista "1" --> "*" Cardapio
 ' Fluxo de Atendimento e Vínculo
 Nutricionista "1" <-- "*" VinculoPaciente
 UsuarioComum "1" <-- "*" VinculoPaciente
+Nutricionista "1" --> "1" Agenda
 
 ' Consultas e Avaliações vinculadas à relação profissional
-VinculoPaciente "1" --> "*" Consulta
+Agenda "1" --> "*" Consulta
 VinculoPaciente "1" --> "1" Avaliacao
 VinculoPaciente "1" --> "*" Mensagens
 
