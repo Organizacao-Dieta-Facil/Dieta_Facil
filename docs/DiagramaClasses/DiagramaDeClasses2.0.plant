@@ -113,7 +113,7 @@ Nutricionista "1" --> "*" Cardapio
 
 ' Fluxo de Atendimento e Vínculo
 Nutricionista "1" <-- "*" VinculoPaciente
-UsuarioComum "1" <-- "*" VinculoPaciente
+UsuarioComum "1" <-- "1" VinculoPaciente
 Nutricionista "1" --> "1" Agenda
 
 ' Consultas e Avaliações vinculadas à relação profissional
