@@ -3,7 +3,7 @@
 </div>
 
 <p>
-  <img src="docs/Logo/Logo Vetorizada.svg" alt="Logo Dieta Fácil" width="80" align="right" style="margin-left: 20px;">
+  <img src="docs/Logo/Logo Vetorizada.svg" alt="Logo Dieta Fácil" width="100" align="right" style="margin-left: 20px;">
   <br>
   Aplicação com foco na <b>Criação, Organização e Obtenção de cardápios</b>. <br> 
   Consultando o Banco de Dados contendo informações nutricionais de diversos alimentos e nutrientes.
