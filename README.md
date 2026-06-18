@@ -22,7 +22,8 @@
 
   - A criação de cardápios saudáveis;
   - O acompanhamento nutricional;
-  - A organização alimentar diária.
+  - A organização alimentar diária;
+  - Facilitar o trabalho de nutricionistas.
 
 ---
 
@@ -39,7 +40,7 @@
 
 - Dificuldade em controlar a dieta (ganhar ou perder peso);
 - Dificuldade em encontrar cardápios compatíveis com suas necessidades;
-- Falta de ferramentas para nutricionistas montar mais facilmente cardápios para seus pacientes.
+- Falta de ferramentas para nutricionistas gerenciar seus pacientes.
 
 ---
 
@@ -98,8 +99,11 @@
 | :---: | :---: | :---: |
 | <img width="250" src="https://github.com/user-attachments/assets/bc3d2f11-c1f7-45b5-bec9-c9cd04b7b36a" /> | <img width="250" src="https://github.com/user-attachments/assets/e18e67c5-973b-40af-b578-70e3bf9bcf67" /> | <img width="250" src="https://github.com/user-attachments/assets/e78756f5-9273-4ffc-add3-653ccccba27a" /> |
 
-[Link do Protótipo Parcial no Google Stitch](https://stitch.withgoogle.com/preview/14107004734553997785?node-id=11c1ab9bb3944d03b1d754014fe01c5d)
+---
 
+## Protótipo Parcial
+
+[Link do Protótipo Parcial no Google Stitch](https://stitch.withgoogle.com/preview/14107004734553997785?node-id=11c1ab9bb3944d03b1d754014fe01c5d)
 
 ---
 
@@ -115,7 +119,7 @@
 
 ---
 
-## Proposta de Projeto Integrador 
+## 📄 Proposta de Projeto Integrador 
 
 [Link da Proposta de PI](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/PropostaProjetoIntegrador/Proposta%20de%20Projeto%20Integrador%20.pdf)
 
@@ -127,12 +131,24 @@
 
 ---
 
-### Entrevista com Especialista
+## 👩🏽‍⚕️ Entrevista com Especialista
 
 [Link da Entrevista com o Nutricionista](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/EntrevistaNutricionista/Entrevista%20com%20Nutricionista.pdf)
 
 ---
 
-## RELATÓRIO FINAL
+## 📄 Relatório Final
 
-[Link do RELATÓRIO FINAL](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/RelatorioFinal/RELAT%C3%93RIO%20FINAL%20DIETA%20F%C3%81CIL.pdf)
+[Link do Relatório Final](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/RelatorioFinal/RELAT%C3%93RIO%20FINAL%20DIETA%20F%C3%81CIL.pdf)
+
+---
+
+## Protótipo Final
+
+[Link do Protótipo Final no Google Stitch](https://stitch.withgoogle.com/projects/17912864491138659830)
+
+---
+
+## 🎥 Vídeo Final
+
+[Link do Vídeo Final](https://youtu.be/v1ZOUG-3oz4)
