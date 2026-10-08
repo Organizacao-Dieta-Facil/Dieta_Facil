@@ -118,7 +118,7 @@
 
 ## 🎥 Vídeo Parcial
 
-[Link do Vídeo Parcial no Youtube](https://www.youtube.com/watch?v=JwESGFhHSp4)
+[Link do Vídeo Parcial no Youtube](https://www.youtube.com/watch?v=h8cAwrCuYao)
 
 ---
 
@@ -142,7 +142,7 @@
 
 ## 🎥 Vídeo Final
 
-[Link do Vídeo Final](https://youtu.be/v1ZOUG-3oz4)
+[Link do Vídeo Final](https://www.youtube.com/watch?v=GpaWYaqGACg)
 
 # Cronograma
 
