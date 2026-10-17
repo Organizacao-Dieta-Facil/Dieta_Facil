@@ -59,9 +59,9 @@
 
 ### Integrantes
 
-| <img src="https://github.com/AlfredAlbach.png" width="160px"> | <img src="https://github.com/cesar-augusto76.png" width="160px"> | <img src="https://github.com/miealt.png" width="160px"> | <img src="https://github.com/HugoIorio.png" width="160px"> | <img src="https://github.com/MuFerrari.png" width="160px"> | <img src="https://github.com/Cervelati.png" width="160px"> |
-|:--:|:--:|:--:|:--:|:--:|:--:|
-| **[Alfred Domke](https://github.com/AlfredAlbach)**<br>[LinkedIn](https://www.linkedin.com/in/alfred-domke-albach-0bb14b342/) | **[César Guzmán](https://github.com/cesar-augusto76)**<br>[LinkedIn](https://www.linkedin.com/in/c%C3%A9sar-augusto-601685351?utm_source=share_via&utm_content=profile&utm_medium=member_android) | **[Davi Guo](https://github.com/miealt)**<br>[LinkedIn](https://www.linkedin.com/in/davi-guo-766bb5440/) | **[Hugo Iorio](https://github.com/HugoIorio)**<br>[LinkedIn](https://www.linkedin.com/in/hugo-iorio-860317393/) | **[Murilo Ferrari](https://github.com/MuFerrari)**<br>[LinkedIn](http://www.linkedin.com/in/murilo-ferrari-menezes) | **[Luiz Henrique](https://github.com/Cervelati)**<br>[LinkedIn](https://www.linkedin.com/in/luiz-henrique-da-silva-cervelati/) |
+| <img src="https://github.com/AlfredAlbach.png" width="160px"> | <img src="https://github.com/cesar-augusto76.png" width="160px"> | <img src="https://github.com/miealt.png" width="160px"> | <img src="https://github.com/HugoIorio.png" width="160px"> | <img src="https://github.com/MuFerrari.png" width="160px"> |
+|:--:|:--:|:--:|:--:|:--:|
+| **[Alfred Domke](https://github.com/AlfredAlbach)**<br>[LinkedIn](https://www.linkedin.com/in/alfred-domke-albach-0bb14b342/) | **[César Guzmán](https://github.com/cesar-augusto76)**<br>[LinkedIn](https://www.linkedin.com/in/c%C3%A9sar-augusto-601685351?utm_source=share_via&utm_content=profile&utm_medium=member_android) | **[Davi Guo](https://github.com/miealt)**<br>[LinkedIn](https://www.linkedin.com/in/davi-guo-766bb5440/) | **[Hugo Iorio](https://github.com/HugoIorio)**<br>[LinkedIn](https://www.linkedin.com/in/hugo-iorio-860317393/) | **[Murilo Ferrari](https://github.com/MuFerrari)**<br>[LinkedIn](http://www.linkedin.com/in/murilo-ferrari-menezes) | 
 
 ---
 
