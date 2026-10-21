@@ -143,7 +143,3 @@
 ## 🎥 Vídeo Final
 
 [Link do Vídeo Final](https://www.youtube.com/watch?v=GpaWYaqGACg)
-
-# Cronograma
-
-[Link do Cronograma](https://docs.google.com/spreadsheets/d/1SBv2T3NDX5IA3f_yF83lEsErtIYgmoLAIoTeAD__t_o/edit?usp=sharing)
