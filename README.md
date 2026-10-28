@@ -136,7 +136,7 @@
 
 ## Protótipo Final
 
-[Link do Protótipo Final no Google Stitch](https://stitch.withgoogle.com/projects/17912864491138659830)
+[Link do Protótipo Final no Google Stitch](https://stitch.withgoogle.com/projects/3671992533216312107)
 
 ---
 
