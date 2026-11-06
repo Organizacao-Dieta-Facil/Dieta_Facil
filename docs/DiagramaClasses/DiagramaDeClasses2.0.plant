@@ -25,6 +25,8 @@ class Meta {
 -int nivelAtividade
 -double pesoMeta
 -double caloriasObjetivo
+-double aguaObjetivo
+-double sonoObjetivo
 }
 
 class Cardapio {
@@ -45,6 +47,7 @@ class Registro {
 -double totalFibras
 -double totalSodio
 -double totalAgua
+-String totalSono
 -Date diaRegistrado
 }
 
@@ -82,6 +85,7 @@ class Avaliacao {
 class VinculoPaciente {
 -Date dataInicio
 -boolean ativo
+-String notasPaciente
 }
 
 class Mensagens {
@@ -91,6 +95,59 @@ class Mensagens {
 class Agenda {
 -DateTime horarioInicioAtendimento
 -DateTime horarioFimAtendimento
+}
+class ResultadoBioimpedancia{
+-DateTime data
+-String id
+-String sexo
+-int idade
+-double altura
+-String tempoTeste
+-int pontuacaoCorporal
+-double peso
+-double massaGorda
+-double massaOssea
+-double massaProteica
+-double aguaCorporal
+-double massaMuscular
+-double musculoEsqueletico
+-double pesoAlvoRecomendado
+-double controlePeso
+-double controleGordura
+-double controleMuscular
+-double imc
+-double taxaGorduraCorporal
+-double obesidadePercentual
+-int grauGorduraVisceral
+-int taxaMetabolicaBasal
+-double pesoLivreGordura
+-double gorduraSubcutanea
+-double asmi
+-int idadeDoCorpo
+-double whr
+-String equilibrioSuperior
+-String equilibrioMaisBaixo
+-String equilibrioParteSuperior
+-double gorduraBracoEsquerdo
+-double gorduraBracoDireito
+-double gorduraTronco
+-double gorduraPernaEsquerda
+-double gorduraPernaDireita
+-double musculoBracoEsquerdo
+-double musculoBracoDireito
+-double musculoTronco
+-double musculoPernaEsquerda
+-double musculoPernaDireita
+-double impedancia20kHzBracoDireito
+-double impedancia20kHzBracoEsquerdo
+-double impedancia20kHzTronco
+-double impedancia20kHzPernaDireita
+-double impedancia20kHzPernaEsquerda
+-double impedancia100kHzBracoDireito
+-double impedancia100kHzBracoEsquerdo
+-double impedancia100kHzTronco
+-double impedancia100kHzPernaDireita
+-double impedancia100kHzPernaEsquerda
 }
 
 ' Herança
@@ -120,5 +177,6 @@ Nutricionista "1" --> "1" Agenda
 Agenda "1" --> "*" Consulta
 VinculoPaciente "1" --> "1" Avaliacao
 VinculoPaciente "1" --> "*" Mensagens
+VinculoPaciente "1" --> "*" ResultadoBioimpedancia
 
 @enduml
