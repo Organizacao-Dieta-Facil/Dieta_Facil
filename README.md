@@ -3,61 +3,73 @@
 </div>
 
 <p>
-  <img src="docs/Logo/Logo Vetorizada.svg" alt="Logo Dieta Fácil" width="100" align="right" style="margin-left: 20px;">
+  <img src="docs/Logo/Logo Vetorizada.svg" alt="Logo Dieta Fácil" width="96" align="right" style="margin-left: 10px;">
   <br>
-  Aplicação com foco na <b>Criação, Organização e Obtenção de cardápios</b>. <br> 
-  Consultando o Banco de Dados contendo informações nutricionais de diversos alimentos e nutrientes.
+  Aplicação com foco em ser uma plataforma digital móvel que irá atuar <br>
+    como um <b>Ecossistema Unificado na Gestão e Acompanhamento Nutricional</b>.
 </p>
 
 ---
   
-## 📌 O aplicativo Busca Facilitar:
+## <br>📌 O aplicativo Busca Facilitar
 
+### - Para Usuários:
   - A criação de cardápios saudáveis;
   - O acompanhamento nutricional;
-  - A organização alimentar diária;
-  - Facilitar o trabalho de nutricionistas.
+  - A organização alimentar diária.
+
+### - Para Nutricionistas:
+  - A consulta da dieta de pacientes; 
+  - A captação de pacientes por geolocalização;
+  - O acompanhamento pós-consulta;
+  - Ser um meio de contato direto com os pacientes.
 
 ---
 
-### 👥 Atores / Personas
+### <br>👥 Atores / Personas
 
+- Nutricionistas que irão utilizar o aplicativo para montar cardápios, entrar em contato com os pacientes e fazer o acompanhamento deles;
 - Usuários com rotinas saudáveis que desejam evoluir e diversificar o cardápio;
 - Usuários casuais que querem apenas manter o peso ou melhorar hábitos alimentares;
-- Usuários que estão fora do peso (para mais ou para menos) e desejam mudar sua rotina alimentar;
-- Nutricionistas que irão utilizar o aplicativo para montar cardápios e enviar aos pacientes.
+- Usuários que estão fora do peso (para mais ou para menos) e desejam mudar sua rotina alimentar.
 
 ---
 
-### 🩹 Principais Dores
+### <br>🩹 Principais Dores
 
-- Dificuldade em controlar a dieta (ganhar ou perder peso);
-- Dificuldade em encontrar cardápios compatíveis com suas necessidades;
-- Falta de ferramentas para nutricionistas gerenciar seus pacientes.
+- Falta de ferramentas integrada para nutricionistas gerenciarem seus pacientes;
+- A desorganização da rotina alimentar;
+- Dificuldade em controlar a dieta (ganhar ou perder peso).
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## <br><br>🛠️ Tecnologias Utilizadas
+
+### 🧩Framework 
+- Ktor.
+- Multiplataforma Compose.
 
 ### 💻 Desenvolvimento
 - **Backend:** Kotlin; 
-- **Frontend:** Kotlin.  
+- **Frontend:** Kotlin;
+- **Banco de Dados:** SQLite e PostgreSQL;   
 
 ### 🧰 Ferramentas
 - Visual Studio Code;
 - Android Studio;
 - IntelliJ IDEA;
+- Miro.
 
 ### 🤖 Agentes de IA
 - Google Stitch;
 - ChatGPT;
 - Emergent.
 
-## 👨‍💻 Equipe do Projeto
+## <br>👨‍💻 Equipe do Projeto
 
 > Toda a equipe do projeto é responsável pelo desenvolvimento.
 
-### Integrantes
+### <br>Integrantes
 
 | <img src="https://github.com/AlfredAlbach.png" width="160px"> | <img src="https://github.com/cesar-augusto76.png" width="160px"> | <img src="https://github.com/miealt.png" width="160px"> | <img src="https://github.com/HugoIorio.png" width="160px"> | <img src="https://github.com/MuFerrari.png" width="160px"> |
 |:--:|:--:|:--:|:--:|:--:|
@@ -65,13 +77,13 @@
 
 ---
 
-## 👥 Personas
+## <br>👥 Personas
 
 [Link das Personas no Canva](https://www.canva.com/design/DAHEQc0Vxik/Gd9rUqFoSZCpKgN4DhEZng/edit?utm_content=DAHEQc0Vxik&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 ---
 
-## 📋 Requisitos do Sistema
+## <br>📋 Requisitos do Sistema
 
 [Link dos Requisitos Funcionais](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/requisitos/Requisitos%20Funcionais.md)
 
@@ -79,12 +91,12 @@
 
 ---
 
-## 📊 Diagrama de Casos de Uso
+## <br>📊 Diagrama de Casos de Uso
 
 [Link do Diagrama de Casos de Uso](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/CasosDeUso/DiagramaCasosUso.png)
 
 ---
-## 📱 Protótipo Parcial
+## <br>📱 Protótipo Parcial
 
 | Tela 1 | Tela 2 | Tela 3 |
 | :---: | :---: | :---: |
@@ -92,49 +104,49 @@
 
 ---
 
-## Protótipo Parcial
+## <br>Protótipo Parcial
 
 [Link do Protótipo Parcial no Google Stitch](https://stitch.withgoogle.com/preview/14107004734553997785?node-id=11c1ab9bb3944d03b1d754014fe01c5d)
 
 ---
 
-## 📐 Diagrama de Classes
+## <br>📐 Diagrama de Classes
 
 [Link do Diagrama de Classes](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/DiagramaClasses/DiagramaDeClasses2.0.png)
 
 ---
 
-## 📄 Documento de Visão
+## <br>📄 Documento de Visão
 
 [Link do DOCUMENTO DE VISÃO](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/DocumentoVisao/Documento%20de%20Vis%C3%A3o.pdf)
 
 ---
 
-## 📄 Proposta de Projeto Integrador 
+## <br>📄 Proposta de Projeto Integrador 
 
 [Link da Proposta de PI](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/PropostaProjetoIntegrador/Proposta%20de%20Projeto%20Integrador%20.pdf)
 
 ---
 
-## 🎥 Vídeo Parcial
+## <br>🎥 Vídeo Parcial
 
 [Link do Vídeo Parcial no Youtube](https://www.youtube.com/watch?v=h8cAwrCuYao)
 
 ---
 
-## 👩🏽‍⚕️ Entrevista com Especialista
+## <br>👩🏽‍⚕️ Entrevista com Especialista
 
 [Link da Entrevista com o Nutricionista](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/EntrevistaNutricionista/Entrevista%20com%20Nutricionista.pdf)
 
 ---
 
-## 📄 Relatório Final
+## <br>📄 Relatório Final
 
 [Link do Relatório Final](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/RelatorioFinal/RELAT%C3%93RIO%20FINAL%20DIETA%20F%C3%81CIL.pdf)
 
 ---
 
-## Protótipo Final
+## <br>Protótipo Final
 
 [Link do Protótipo Final no Google Stitch](https://stitch.withgoogle.com/projects/3671992533216312107)
 
@@ -143,3 +155,9 @@
 ## 🎥 Vídeo Final
 
 [Link do Vídeo Final](https://www.youtube.com/watch?v=GpaWYaqGACg)
+
+---
+
+## RELATÓRIO
+
+[Link do Relatório](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/Relatorio/PJ.202604_11023_ES3_03.docx.pdf)
