@@ -1,6 +1,9 @@
 package com.example.dietafacilpweb
 
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import com.example.dietafacilpweb.db.DatabaseDriverFactory
 import com.example.dietafacilpweb.db.DietaRepository
 import com.example.dietafacilpweb.db.criarBanco
@@ -12,9 +15,31 @@ import com.example.dietafacilpweb.db.criarBanco
 class CardapioState(private val repo: DietaRepository) {
     val refeicoes = mutableStateListOf<Refeicao>()
 
+    /** Meta calórica diária; null enquanto o usuário não definir uma. */
+    var metaKcal by mutableStateOf<Int?>(null)
+        private set
+
+    /** True até o usuário passar pela pergunta de meta (tela exibida só no primeiro acesso). */
+    var primeiroAcessoPendente by mutableStateOf(!repo.primeiroAcessoConcluido())
+        private set
+
     init {
         repo.prepararBanco()
         refeicoes.addAll(repo.carregarRefeicoes())
+        metaKcal = repo.carregarMeta()
+    }
+
+    fun concluirPrimeiroAcesso() {
+        repo.concluirPrimeiroAcesso()
+        primeiroAcessoPendente = false
+    }
+
+    /** Calcula a meta a partir do perfil, grava no banco e passa a exibi-la. */
+    fun definirMeta(perfil: PerfilMeta) {
+        val meta = calcularMetaKcal(perfil)
+        repo.salvarMeta(perfil, meta)
+        metaKcal = meta
+        concluirPrimeiroAcesso()
     }
 
     fun sugestoes(): List<Food> = repo.sugestoes()

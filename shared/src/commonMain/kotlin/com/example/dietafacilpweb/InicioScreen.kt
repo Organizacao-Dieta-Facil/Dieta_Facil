@@ -1,7 +1,6 @@
 package com.example.dietafacilpweb
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.border
@@ -23,24 +22,21 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlin.math.roundToInt
-// Essa é a tela inicial do aplicativo
-// Meta diária de calorias - Está com o valor fixo de 2000 pois ainda não fizemos as telas para definição da meta
-private const val META_KCAL = 2000
+// Essa é a tela inicial do aplicativo -- Tela principal do cardápio
 
 @Composable
 fun InicioScreen( // Construção geral da tela
     refeicoes: List<Refeicao>,
+    metaKcal: Int?, // Meta calórica diária; null se o usuário não definiu uma
     onRegistrarConsumo: (Refeicao) -> Unit,
     onAdicionarRefeicao: (String) -> Unit,
     onExcluirRefeicao: (Refeicao) -> Unit,
+    onAbrirConfiguracoes: () -> Unit,
 ) {
     var adicionando by remember { mutableStateOf(false) }
     var editandoNome by remember { mutableStateOf<Refeicao?>(null) }
@@ -52,7 +48,16 @@ fun InicioScreen( // Construção geral da tela
             Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(20.dp),
             verticalArrangement = Arrangement.spacedBy(40.dp),
         ) {
-            ResumoDiario(consumido = refeicoes.sumOf { it.kcal })
+            // Opção 1: Ícone no canto superior direito da área principal (acima do Resumo Diário)
+            Row(
+                Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.End,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                BotaoIcone("⚙️", Cores.OnSurfaceVariant, onAbrirConfiguracoes)
+            }
+
+            ResumoDiario(consumido = refeicoes.sumOf { it.kcal }, meta = metaKcal)
             Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
                 Text("Refeições", fontSize = 24.sp, fontWeight = FontWeight.Medium, color = Cores.OnSurface)
                 Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
@@ -145,32 +150,37 @@ private fun DialogNomeRefeicao(
 }
 
 @Composable
-private fun ResumoDiario(consumido: Double) { // Quadro verde superior, informa total de calorias das refeições
-    val fracao = (consumido / META_KCAL).toFloat().coerceIn(0f, 1f)
-    val restante = META_KCAL - consumido
+private fun ResumoDiario(consumido: Double, meta: Int?) { // Quadro verde superior, informa total de calorias das refeições
     Surface(color = Cores.PrimaryContainer, shape = RoundedCornerShape(12.dp), shadowElevation = 6.dp) {
         Column(Modifier.fillMaxWidth().padding(24.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.Bottom) {
-                Column(Modifier.weight(1f)) {
-                    Text("Resumo Diário", color = Cores.OnPrimaryContainer.copy(alpha = 0.9f), fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
-                    Row(verticalAlignment = Alignment.Bottom) {
-                        Text(consumido.roundToInt().milhar(), color = Cores.OnPrimaryContainer, fontSize = 36.sp, fontWeight = FontWeight.Bold)
-                        Text(" / ${META_KCAL.milhar()} kcal", color = Cores.OnPrimaryContainer, fontSize = 18.sp, modifier = Modifier.padding(bottom = 6.dp))
-                    }
+            Column {
+                Text("Resumo Diário", color = Cores.OnPrimaryContainer.copy(alpha = 0.9f), fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
+                Row(verticalAlignment = Alignment.Bottom) {
+                    Text(consumido.roundToInt().milhar(), color = Cores.OnPrimaryContainer, fontSize = 36.sp, fontWeight = FontWeight.Bold)
+                    Text(
+                        if (meta != null) " / ${meta.milhar()} kcal" else " kcal",
+                        color = Cores.OnPrimaryContainer, fontSize = 18.sp, modifier = Modifier.padding(bottom = 6.dp),
+                    )
                 }
             }
-            Box(Modifier.fillMaxWidth().height(16.dp).clip(RoundedCornerShape(50)).background(Color.Black.copy(alpha = 0.1f))) {
-                Box(Modifier.fillMaxWidth(fracao).fillMaxHeight().clip(RoundedCornerShape(50)).background(Color.White))
+            if (meta != null) {
+                val fracao = (consumido / meta).toFloat().coerceIn(0f, 1f)
+                val restante = meta - consumido
+                Box(Modifier.fillMaxWidth().height(16.dp).clip(RoundedCornerShape(50)).background(Color.Black.copy(alpha = 0.1f))) {
+                    Box(Modifier.fillMaxWidth(fracao).fillMaxHeight().clip(RoundedCornerShape(50)).background(Color.White))
+                }
+                Text(
+                    when {
+                        restante > 0.5 -> "Faltam ${restante.roundToInt().milhar()} kcal para atingir sua meta."
+                        restante < -0.5 -> "Você ultrapassou a meta em ${(-restante).roundToInt().milhar()} kcal."
+                        else -> "Meta diária atingida!"
+                    },
+                    color = Cores.OnPrimaryContainer.copy(alpha = 0.8f),
+                    fontSize = 16.sp,
+                )
+            } else {
+                Text("Nenhuma meta definida.", color = Cores.OnPrimaryContainer.copy(alpha = 0.8f), fontSize = 16.sp)
             }
-            Text(
-                when {
-                    restante > 0.5 -> "Faltam ${restante.roundToInt().milhar()} kcal para atingir sua meta."
-                    restante < -0.5 -> "Você ultrapassou a meta em ${(-restante).roundToInt().milhar()} kcal."
-                    else -> "Meta diária atingida!"
-                },
-                color = Cores.OnPrimaryContainer.copy(alpha = 0.8f),
-                fontSize = 16.sp,
-            )
         }
     }
 }

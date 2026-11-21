@@ -8,12 +8,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 
-private enum class Tela { Inicio, Refeicao, Pesquisa, Detalhe }
+private enum class Tela { PerguntaMeta, FormularioMeta, Inicio, Refeicao, Pesquisa, Detalhe, Configuracoes, }
 
 @Composable
 fun App(cardapio: CardapioState) {
     AppTheme {
-        var tela by remember { mutableStateOf(Tela.Inicio) }
+        var tela by remember {
+            mutableStateOf(if (cardapio.primeiroAcessoPendente) Tela.PerguntaMeta else Tela.Inicio)
+        }
         var selecionada by remember { mutableStateOf<Refeicao?>(null) }
         var alimentoEscolhido by remember { mutableStateOf<Food?>(null) }
 
@@ -22,6 +24,21 @@ fun App(cardapio: CardapioState) {
                 val atual = selecionada
                 val escolhido = alimentoEscolhido
                 when {
+                    tela == Tela.PerguntaMeta -> DefinirMetaScreen(
+                        onConfigurar = { tela = Tela.FormularioMeta },
+                        onAgoraNao = { cardapio.concluirPrimeiroAcesso(); tela = Tela.Inicio },
+                    )
+
+                    tela == Tela.Configuracoes -> ConfiguracoesScreen(
+                        onVoltar = { tela = Tela.Inicio },
+                        onAlterarMeta = { tela = Tela.FormularioMeta },
+                    )
+
+                    tela == Tela.FormularioMeta -> FormularioMetaScreen(
+                        onVoltar = { tela = Tela.Configuracoes }, // volta para Configurações ao reconfigurar
+                        onCalcular = { perfil -> cardapio.definirMeta(perfil); tela = Tela.Inicio },
+                    )
+
                     tela == Tela.Pesquisa && atual != null -> {
                         val sugestoes = remember { cardapio.sugestoes() }
                         PesquisaScreen(
@@ -55,9 +72,11 @@ fun App(cardapio: CardapioState) {
 
                     else -> InicioScreen(
                         refeicoes = cardapio.refeicoes,
+                        metaKcal = cardapio.metaKcal,
                         onRegistrarConsumo = { selecionada = it; tela = Tela.Refeicao },
                         onAdicionarRefeicao = { nome -> cardapio.adicionarRefeicao(nome) },
                         onExcluirRefeicao = { cardapio.excluirRefeicao(it) },
+                        onAbrirConfiguracoes = { tela = Tela.Configuracoes },
                     )
                 }
             }
