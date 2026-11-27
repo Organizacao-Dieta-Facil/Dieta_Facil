@@ -1,0 +1,24 @@
+name: dieta-facil-lbd
+services:
+  postgres:
+    image: postgres:18.7
+    environment:
+      POSTGRES_DB: dieta_facil_teste
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${LBD_POSTGRES_PASSWORD:?Defina LBD_POSTGRES_PASSWORD no arquivo .env}
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+      - ./postgresql/01_ddl_estrutura.sql:/docker-entrypoint-initdb.d/01_ddl_estrutura.sql:ro
+      - ./postgresql/02_dml_carga_inicial.sql:/docker-entrypoint-initdb.d/02_dml_carga_inicial.sql:ro
+      - ./postgresql/03_programacao_avancada.sql:/docker-entrypoint-initdb.d/03_programacao_avancada.sql:ro
+      - ./postgresql/04_testes_e_transacoes.sql:/lbd/04_testes_e_transacoes.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U postgres -d dieta_facil_teste"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+volumes:
+  postgres_data:

@@ -1,0 +1,142 @@
+PostgreSQL 18.7 nativo, Windows x64
+Validação em 26/11/2026 no banco dieta_facil_teste
+Scripts 01, 02, 03 e 04 executados com ON_ERROR_STOP=1.
+Após o script 04: 20 registros no diário e 0 eventos de histórico.
+
+SET
+BEGIN
+psql:04_testes_e_transacoes.sql:51: NOTICE:  Cenário 1: P1013 recebido e remoção do último item desfeita
+DO
+SET CONSTRAINTS
+ROLLBACK
+BEGIN
+psql:04_testes_e_transacoes.sql:109: NOTICE:  Cenário 2: exclusão por outro usuário rejeitada
+psql:04_testes_e_transacoes.sql:109: NOTICE:  Cenário 2: falha simulada desfez a exclusão e o histórico
+DO
+COMMIT
+   kcal_por_porcao    | meta_kcal
+----------------------+-----------
+ 195.0000000000000000 |      1930
+(1 row)
+
+ comum_id |    dia     | total_refeicoes | total_lancamentos | calorias_consumidas  | meta_kcal | situacao_meta
+----------+------------+-----------------+-------------------+----------------------+-----------+----------------
+        1 | 2026-11-01 |               1 |                 3 | 279.4700000000000000 |    1730.0 | dentro_da_meta
+(1 row)
+
+ consulta_id | nutricionista_id | nutricionista_nome | paciente_id |   paciente_nome    |       inicio_em        |         fim_em         |  status
+-------------+------------------+--------------------+-------------+--------------------+------------------------+------------------------+----------
+           1 |               21 | Pessoa de teste 21 |           1 | Pessoa de teste 01 | 2026-12-01 11:00:00-03 | 2026-12-01 11:45:00-03 | agendada
+(1 row)
+
+                                                            QUERY PLAN
+-----------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=12.72..12.73 rows=5 width=40) (actual time=0.015..0.015 rows=3.00 loops=1)
+   Sort Key: id
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=2
+   ->  Bitmap Heap Scan on alimento_consumido  (cost=4.19..12.66 rows=5 width=40) (actual time=0.008..0.008 rows=3.00 loops=1)
+         Recheck Cond: (refeicao_id = 1)
+         Heap Blocks: exact=1
+         Buffers: shared hit=2
+         ->  Bitmap Index Scan on idx_item_refeicao  (cost=0.00..4.19 rows=5 width=0) (actual time=0.003..0.004 rows=3.00 loops=1)
+               Index Cond: (refeicao_id = 1)
+               Index Searches: 1
+               Buffers: shared hit=1
+ Planning Time: 0.032 ms
+ Execution Time: 0.024 ms
+(14 rows)
+
+                                                         QUERY PLAN
+-----------------------------------------------------------------------------------------------------------------------------
+ Bitmap Heap Scan on alimento  (cost=4.16..9.51 rows=2 width=40) (actual time=0.010..0.011 rows=1.00 loops=1)
+   Recheck Cond: (lower(nome) = 'banana'::text)
+   Heap Blocks: exact=1
+   Buffers: shared hit=2
+   ->  Bitmap Index Scan on idx_alimento_nome  (cost=0.00..4.16 rows=2 width=0) (actual time=0.006..0.006 rows=1.00 loops=1)
+         Index Cond: (lower(nome) = 'banana'::text)
+         Index Searches: 1
+         Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=2
+ Planning Time: 0.032 ms
+ Execution Time: 0.014 ms
+(12 rows)
+
+                                                               QUERY PLAN
+-----------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=9.53..9.53 rows=2 width=16) (actual time=0.007..0.007 rows=1.00 loops=1)
+   Sort Key: registrado_em
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=2
+   ->  Bitmap Heap Scan on registro  (cost=4.17..9.52 rows=2 width=16) (actual time=0.005..0.006 rows=1.00 loops=1)
+         Recheck Cond: ((comum_id = 1) AND (registrado_em >= '2026-10-31 21:00:00-03'::timestamp with time zone))
+         Heap Blocks: exact=1
+         Buffers: shared hit=2
+         ->  Bitmap Index Scan on idx_registro_comum_data  (cost=0.00..4.17 rows=2 width=0) (actual time=0.002..0.002 rows=2.00 loops=1)
+               Index Cond: ((comum_id = 1) AND (registrado_em >= '2026-10-31 21:00:00-03'::timestamp with time zone))
+               Index Searches: 1
+               Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=3
+ Planning Time: 0.039 ms
+ Execution Time: 0.012 ms
+(16 rows)
+
+                                                               QUERY PLAN
+-----------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=11.31..11.31 rows=3 width=40) (actual time=0.013..0.014 rows=2.00 loops=1)
+   Sort Key: enviada_em
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=2
+   ->  Bitmap Heap Scan on mensagem  (cost=4.17..11.28 rows=3 width=40) (actual time=0.011..0.012 rows=2.00 loops=1)
+         Recheck Cond: (comum_id = 1)
+         Heap Blocks: exact=1
+         Buffers: shared hit=2
+         ->  Bitmap Index Scan on idx_mensagem_comum_data  (cost=0.00..4.17 rows=3 width=0) (actual time=0.004..0.004 rows=2.00 loops=1)
+               Index Cond: (comum_id = 1)
+               Index Searches: 1
+               Buffers: shared hit=1
+ Planning:
+   Buffers: shared hit=75
+ Planning Time: 1.595 ms
+ Execution Time: 0.020 ms
+(16 rows)
+
+                                                                   QUERY PLAN
+-------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=11.31..11.31 rows=3 width=40) (actual time=0.012..0.012 rows=2.00 loops=1)
+   Sort Key: enviada_em
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=2
+   ->  Bitmap Heap Scan on mensagem  (cost=4.17..11.28 rows=3 width=40) (actual time=0.010..0.010 rows=2.00 loops=1)
+         Recheck Cond: (nutricionista_id = 21)
+         Heap Blocks: exact=1
+         Buffers: shared hit=2
+         ->  Bitmap Index Scan on idx_mensagem_nutricionista_data  (cost=0.00..4.17 rows=3 width=0) (actual time=0.006..0.006 rows=2.00 loops=1)
+               Index Cond: (nutricionista_id = 21)
+               Index Searches: 1
+               Buffers: shared hit=1
+ Planning Time: 0.029 ms
+ Execution Time: 0.017 ms
+(14 rows)
+
+                                                                QUERY PLAN
+-------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=11.31..11.31 rows=3 width=40) (actual time=0.010..0.010 rows=2.00 loops=1)
+   Sort Key: enviada_em
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=2
+   ->  Bitmap Heap Scan on mensagem  (cost=4.17..11.28 rows=3 width=40) (actual time=0.008..0.009 rows=2.00 loops=1)
+         Recheck Cond: (vinculo_id = 1)
+         Heap Blocks: exact=1
+         Buffers: shared hit=2
+         ->  Bitmap Index Scan on idx_mensagem_vinculo_data  (cost=0.00..4.17 rows=3 width=0) (actual time=0.005..0.005 rows=2.00 loops=1)
+               Index Cond: (vinculo_id = 1)
+               Index Searches: 1
+               Buffers: shared hit=1
+ Planning Time: 0.025 ms
+ Execution Time: 0.015 ms
+(14 rows)
+
+RESET
