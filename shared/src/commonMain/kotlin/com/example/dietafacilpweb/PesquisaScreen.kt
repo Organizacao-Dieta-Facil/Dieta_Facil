@@ -28,6 +28,7 @@ fun PesquisaScreen(
     onAdicionar: (Food) -> Unit,
     sugestoes: List<Food>,
     buscar: (String) -> List<Food>,
+    onNovoAlimento: (String) -> Unit,
 ) {
     var busca by remember { mutableStateOf("") }
     val lista = remember(busca) { if (busca.isBlank()) sugestoes else buscar(busca) }
@@ -72,6 +73,7 @@ fun PesquisaScreen(
                 lista.forEach { CartaoAlimento(it) { onAdicionar(it) } }
                 if (lista.isEmpty()) {
                     Text("Nenhum alimento encontrado.", color = Cores.OnSurfaceVariant)
+                    LinkNovoAlimento { onNovoAlimento(busca.trim()) }
                 }
             }
         }

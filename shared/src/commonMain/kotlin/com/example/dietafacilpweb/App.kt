@@ -2,28 +2,51 @@ package com.example.dietafacilpweb
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 
-private enum class Tela { PerguntaMeta, FormularioMeta, Inicio, Refeicao, Pesquisa, Detalhe, Configuracoes, }
+private enum class Tela { Login, Cadastro, NovoAlimento, PerguntaMeta, FormularioMeta, Inicio, Refeicao, Pesquisa, Detalhe, Configuracoes, }
 
 @Composable
 fun App(cardapio: CardapioState) {
     AppTheme {
-        var tela by remember {
-            mutableStateOf(if (cardapio.primeiroAcessoPendente) Tela.PerguntaMeta else Tela.Inicio)
-        }
+        var tela by remember { mutableStateOf(Tela.Login) }
+        var termoNovoAlimento by remember { mutableStateOf("") }
+        // Para onde ir depois de entrar na conta
+        val entrar = { tela = if (cardapio.primeiroAcessoPendente) Tela.PerguntaMeta else Tela.Inicio }
         var selecionada by remember { mutableStateOf<Refeicao?>(null) }
         var alimentoEscolhido by remember { mutableStateOf<Food?>(null) }
 
         Scaffold(containerColor = Cores.Background) { padding ->
-            Box(Modifier.fillMaxSize().padding(padding).navigationBarsPadding()) {
+            Box(Modifier.fillMaxSize().padding(padding).navigationBarsPadding().imePadding()) {
                 val atual = selecionada
                 val escolhido = alimentoEscolhido
                 when {
+                    tela == Tela.Login -> LoginScreen(
+                        autenticar = cardapio::autenticar,
+                        onEntrar = entrar,
+                        onCadastrar = { tela = Tela.Cadastro },
+                    )
+
+                    tela == Tela.Cadastro -> CadastroScreen(
+                        onVoltar = { tela = Tela.Login },
+                        cadastrar = cardapio::cadastrarUsuario,
+                        onCadastrado = entrar,
+                    )
+
+                    tela == Tela.NovoAlimento && atual != null -> NovoAlimentoScreen(
+                        nomeInicial = termoNovoAlimento,
+                        onCancelar = { tela = Tela.Pesquisa },
+                        onSalvar = { novo ->
+                            alimentoEscolhido = cardapio.cadastrarAlimento(novo)
+                            tela = Tela.Detalhe // já abre o alimento novo para adicionar à refeição
+                        },
+                    )
+
                     tela == Tela.PerguntaMeta -> DefinirMetaScreen(
                         onConfigurar = { tela = Tela.FormularioMeta },
                         onAgoraNao = { cardapio.concluirPrimeiroAcesso(); tela = Tela.Inicio },
@@ -49,6 +72,10 @@ fun App(cardapio: CardapioState) {
                             },
                             sugestoes = sugestoes,
                             buscar = cardapio::buscarAlimentos,
+                            onNovoAlimento = { termo ->
+                                termoNovoAlimento = termo
+                                tela = Tela.NovoAlimento
+                            },
                         )
                     }
 

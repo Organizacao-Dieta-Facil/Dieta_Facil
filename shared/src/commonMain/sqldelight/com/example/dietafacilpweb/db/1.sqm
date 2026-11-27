@@ -1,0 +1,23 @@
+-- Migração da versão 1 para a 2: cria as tabelas novas em instalações que já existem.
+CREATE TABLE tb_usuario (
+    id_usuario   INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    nome_usuario TEXT    NOT NULL UNIQUE COLLATE NOCASE,
+    email        TEXT    NOT NULL UNIQUE COLLATE NOCASE,
+    senha_hash   TEXT    NOT NULL,
+    sal          TEXT    NOT NULL,
+    genero       TEXT    NOT NULL
+);
+
+CREATE TABLE tb_alimento_detalhe (
+    id_alimento           INTEGER NOT NULL PRIMARY KEY REFERENCES tb_alimento(id_alimento) ON DELETE CASCADE,
+    gordura_saturada_g    REAL    NOT NULL,
+    gordura_trans_g       REAL    NOT NULL,
+    acucar_adicionado_g   REAL    NOT NULL
+);
+
+
+CREATE TABLE tb_preferencias (
+    id                        INTEGER NOT NULL PRIMARY KEY,
+    primeiro_acesso_concluido INTEGER NOT NULL DEFAULT 0,
+    meta_kcal                 INTEGER
+);

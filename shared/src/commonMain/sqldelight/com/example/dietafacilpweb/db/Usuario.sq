@@ -1,0 +1,22 @@
+-- Usuários cadastrados. A senha NUNCA é guardada em texto puro (apenas hash + sal).
+
+CREATE TABLE tb_usuario (
+    id_usuario   INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    nome_usuario TEXT    NOT NULL UNIQUE COLLATE NOCASE,
+    email        TEXT    NOT NULL UNIQUE COLLATE NOCASE,
+    senha_hash   TEXT    NOT NULL,
+    sal          TEXT    NOT NULL,
+    genero       TEXT    NOT NULL
+);
+
+contarPorNomeUsuario:
+SELECT COUNT(*) FROM tb_usuario WHERE nome_usuario = :nomeUsuario;
+
+contarPorEmail:
+SELECT COUNT(*) FROM tb_usuario WHERE email = :email;
+
+selecionarPorLogin:
+SELECT * FROM tb_usuario WHERE nome_usuario = :login OR email = :login;
+
+inserirUsuario:
+INSERT INTO tb_usuario (nome_usuario, email, senha_hash, sal, genero) VALUES (?, ?, ?, ?, ?);

@@ -2,6 +2,7 @@ package com.example.dietafacilpweb.db
 
 import com.example.dietafacilpweb.Entrada
 import com.example.dietafacilpweb.Food
+import com.example.dietafacilpweb.PerfilMeta
 import com.example.dietafacilpweb.Refeicao
 import kotlin.math.round
 
@@ -10,6 +11,7 @@ class DietaRepository(private val db: DietaDatabase) { // Classe que faz a comun
     private val alimentoQ get() = db.alimentoQueries
     private val refeicaoQ get() = db.refeicaoQueries
     private val itemQ get() = db.refeicaoAlimentoQueries
+    private val prefQ get() = db.preferenciasQueries
 
     fun prepararBanco() { //
         if (alimentoQ.contarAlimentos().executeAsOne() > 0L) return
@@ -24,6 +26,26 @@ class DietaRepository(private val db: DietaDatabase) { // Classe que faz a comun
             }
             CatalogoInicial.refeicoes.forEach { refeicaoQ.inserirRefeicao(it) }
         }
+    }
+
+    // ---- Meta e primeiro acesso ----
+
+    private fun preferencias() =
+        prefQ.selecionarPreferencias { _, concluido, meta -> concluido to meta }.executeAsOneOrNull()
+
+    fun primeiroAcessoConcluido(): Boolean = preferencias()?.first == 1L
+
+    fun concluirPrimeiroAcesso() = db.transaction {
+        prefQ.criarSeNaoExistir()
+        prefQ.marcarPrimeiroAcesso()
+    }
+
+    fun carregarMeta(): Int? = preferencias()?.second?.toInt()
+
+    /** Grava a meta calculada. Os dados do perfil em si ainda não são armazenados. */
+    fun salvarMeta(perfil: PerfilMeta, meta: Int) = db.transaction {
+        prefQ.criarSeNaoExistir()
+        prefQ.atualizarMeta(meta.toLong())
     }
 
     // ---- Alimentos ----

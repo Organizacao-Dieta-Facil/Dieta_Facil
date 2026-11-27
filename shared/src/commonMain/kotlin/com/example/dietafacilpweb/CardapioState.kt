@@ -4,6 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import com.example.dietafacilpweb.db.ContaRepository
 import com.example.dietafacilpweb.db.DatabaseDriverFactory
 import com.example.dietafacilpweb.db.DietaRepository
 import com.example.dietafacilpweb.db.criarBanco
@@ -12,7 +13,10 @@ import com.example.dietafacilpweb.db.criarBanco
  * Estado do cardápio usado pelas telas. Cada ação grava no banco e depois atualiza a lista
  * em memória, que a interface observa.
  */
-class CardapioState(private val repo: DietaRepository) {
+class CardapioState(
+    private val repo: DietaRepository,
+    private val contas: ContaRepository,
+) {
     val refeicoes = mutableStateListOf<Refeicao>()
 
     /** Meta calórica diária; null enquanto o usuário não definir uma. */
@@ -45,6 +49,14 @@ class CardapioState(private val repo: DietaRepository) {
     fun sugestoes(): List<Food> = repo.sugestoes()
 
     fun buscarAlimentos(termo: String): List<Food> = repo.buscarAlimentos(termo)
+
+    /** Salva um alimento criado pelo usuário e o devolve já com o id. */
+    fun cadastrarAlimento(novo: NovoAlimento): Food = contas.inserirAlimento(novo)
+
+    fun autenticar(login: String, senha: String): Boolean = contas.autenticar(login, senha)
+
+    fun cadastrarUsuario(nomeUsuario: String, email: String, senha: String, genero: String): ResultadoCadastro =
+        contas.cadastrarUsuario(nomeUsuario, email, senha, genero)
 
     fun adicionarRefeicao(nome: String) {
         val id = repo.inserirRefeicao(nome)
@@ -79,5 +91,7 @@ class CardapioState(private val repo: DietaRepository) {
 }
 
 /** Ponto único para criar o estado a partir do driver de cada plataforma. */
-fun criarCardapioState(factory: DatabaseDriverFactory): CardapioState =
-    CardapioState(DietaRepository(criarBanco(factory)))
+fun criarCardapioState(factory: DatabaseDriverFactory): CardapioState {
+    val banco = criarBanco(factory) // um único banco para os dois repositórios
+    return CardapioState(DietaRepository(banco), ContaRepository(banco))
+}

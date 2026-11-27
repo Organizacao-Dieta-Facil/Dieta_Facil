@@ -1,0 +1,19 @@
+-- Preferências do aplicativo (uma única linha, id = 1): meta calórica e primeiro acesso.
+
+CREATE TABLE tb_preferencias (
+    id                        INTEGER NOT NULL PRIMARY KEY,
+    primeiro_acesso_concluido INTEGER NOT NULL DEFAULT 0,
+    meta_kcal                 INTEGER
+);
+
+selecionarPreferencias:
+SELECT * FROM tb_preferencias WHERE id = 1;
+
+criarSeNaoExistir:
+INSERT OR IGNORE INTO tb_preferencias (id) VALUES (1);
+
+marcarPrimeiroAcesso:
+UPDATE tb_preferencias SET primeiro_acesso_concluido = 1 WHERE id = 1;
+
+atualizarMeta:
+UPDATE tb_preferencias SET meta_kcal = :metaKcal WHERE id = 1;
