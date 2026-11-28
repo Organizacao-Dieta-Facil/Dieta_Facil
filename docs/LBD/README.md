@@ -8,7 +8,7 @@ Esta pasta reúne a modelagem, os scripts e a base de demonstração do trabalho
 
 | Pasta | Conteúdo |
 | --- | --- |
-| [modelagem](modelagem/) | [DER editável](modelagem/DER_Dieta_Facil.drawio), [dicionário de dados, normalização e evidências dos índices](modelagem/Arquitetura.md). |
+| [modelagem](modelagem/) | [Documento técnico](modelagem/Arquitetura.md), [DER PostgreSQL](modelagem/DER_Dieta_Facil_PostgreSQL.drawio) e [DER base SQLite](modelagem/DER_Dieta_Facil.drawio). |
 | [sqlite](sqlite/) | DDL, carga inicial, script Python e arquivo de demonstração pronto para abrir. |
 | [postgresql](postgresql/) | DDL, carga inicial, programação avançada, testes transacionais e [guia para execução e reaproveitamento online](postgresql/README.md). |
 
@@ -47,13 +47,13 @@ O script 03 do PostgreSQL contém três procedures, para registrar, alterar e ex
 
 | Exigência | Estado |
 | --- | --- |
-| Contextualização | Já preparada pelo grupo. Falta incorporá-la ao documento final. |
-| Modelagem e documentação | DER com 15 tabelas e 20 ligações, dicionário e normalização disponíveis. Os tipos do dicionário são do SQLite. A versão acadêmica deve refletir o PostgreSQL. |
-| Scripts 01 e 02 | Disponíveis nos dois bancos. A carga contém pelo menos 20 linhas por tabela. |
+| Contextualização | Incorporada ao documento técnico a partir de ProjetoLBD.pdf. |
+| Modelagem e documentação | MER e DER em imagens, diagramas editáveis, normalização e justificativas. Os scripts detalham os tipos e as restrições PostgreSQL. |
+| Scripts 01 e 02 | Disponíveis nos dois bancos. A carga inicial contém pelo menos 20 linhas por tabela base. O histórico começa vazio. |
 | Índices e evidências | Seis índices de consulta. Os planos, as referências e os lançamentos repetidos foram verificados no SQLite. Os seis índices também apareceram nos planos do PGlite. Os scripts 01 a 04 foram validados também no PostgreSQL 18.7 nativo. Veja as [evidências](postgresql/evidencias-postgresql-18.7.txt). |
 | Script 03 | As três procedures nativas passaram em testes no PostgreSQL embarcado (PGlite). As duas views também foram verificadas no PGlite e no SQLite. A sequência completa também foi validada no PostgreSQL 18.7 nativo para Windows. As duas funções de calorias e meta também foram testadas no PGlite. Auditoria de exclusão e integridade do diário foram testadas nos dois bancos. |
 | Script 04 | [Disponível](postgresql/04_testes_e_transacoes.sql) e executado no PGlite. Inclui dois cenários transacionais, testes dos gatilhos, chamadas e os seis planos de execução. |
-| Slides e pacote final | Pendentes. Reunir documentação, scripts e slides depois de concluir e verificar a programação avançada. |
+| Slides e pacote final | Pendentes. Incorporar os slides ao pacote de entrega. |
 
 O [RF05 do projeto](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/d04fc50/docs/requisitos/Requisitos%20Funcionais.md) é a referência funcional para edição do cardápio e dos itens das refeições.
 
@@ -78,4 +78,4 @@ Use `docker compose stop` para pausar e `docker compose up -d --wait` para retom
 
 ## Demonstração para o vídeo
 
-Abra o [roteiro SQL](postgresql/roteiro_video.sql) no DBeaver, na conexão do Dieta Fácil. Execute um bloco por vez, selecionando-o por inteiro e usando Alt+X. Os blocos 04 e 05 devem incluir os comandos de abertura e fechamento da transação. Para testar tudo de uma vez, execute o arquivo inteiro. Use o banco fictício com os scripts 01 a 03 já instalados.
+Abra o [roteiro SQL](postgresql/roteiro_video.sql) no DBeaver, na conexão do Dieta Fácil. Execute um bloco por vez, selecionando-o por inteiro e usando Alt+X. Os blocos 05, 06 e 07 compartilham uma transação. Execute-os juntos ou na mesma sessão com autocommit ativo, em ordem, do BEGIN ao ROLLBACK. Para testar tudo de uma vez, execute o arquivo inteiro. Use o banco fictício com os scripts 01 a 03 já instalados.

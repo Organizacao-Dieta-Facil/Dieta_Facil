@@ -1,275 +1,83 @@
-# Dieta Fácil · Modelagem e arquitetura SQLite
+# Dieta Fácil · Projeto e arquitetura de banco de dados
 
-Documento técnico da etapa local. Insira a contextualização já preparada pelo grupo antes da entrega acadêmica.
+**Projeto Prático de Laboratório de Banco de Dados**
 
-## DER
+**Equipe** · Alfred Domke Albach, César Augusto Guzmán Fogaça de Almeida, Davi Chwen Shi Guo, Hugo Florio Iorio (líder) e Murilo Ferrari Menezes.
 
-Abra **DER_Dieta_Facil.drawio** no [diagrams.net](https://app.diagrams.net/) em **Arquivo → Abrir de → Dispositivo**. As pontas usam pé de galinha. PK indica chave primária, FK indica chave estrangeira e UQ indica unicidade individual.
+## Contextualização
+
+O Dieta Fácil é um aplicativo de controle alimentar para usuários comuns e nutricionistas. Usuários comuns podem montar cardápios, registrar refeições e buscar acompanhamento profissional. O escopo prevê que nutricionistas gerenciem pacientes, recomendem cardápios, troquem mensagens e organizem consultas.
+
+O projeto prevê PostgreSQL remoto para contas, dados compartilhados e acompanhamento, com SQLite no dispositivo para consultar um catálogo reduzido e montar refeições sem internet. Quando o grupo produziu o documento de contexto, a montagem de cardápios era a funcionalidade implementada, com interface em Kotlin e Compose Multiplatform e três tabelas locais para alimentos, refeições e lançamentos. O trabalho de LBD acrescenta o DER, a modelagem acadêmica e uma implementação PostgreSQL de demonstração. A integração e a sincronização com o aplicativo fazem parte do trabalho futuro.
+
+O SQLite do aplicativo usa valores nutricionais por 1 g ou 1 ml. As bases de demonstração de LBD usam valores por 100 g ou 100 ml. Ao migrar dados do catálogo do aplicativo para LBD, multiplique por 100 os valores nutricionais por unidade. A quantidade do lançamento continua expressa em g ou ml.
+
+Fonte da contextualização · ProjetoLBD.pdf, páginas 1 e 2.
+
+## Modelagem do banco
+
+### MER conceitual
+
+![MER conceitual do Dieta Fácil](MER_Dieta_Facil.png)
+
+### DER da estrutura base
+
+![DER base do Dieta Fácil, com tabelas, atributos, chaves e cardinalidades](DER_Dieta_Facil.png)
+
+A imagem do DER apresenta as 15 tabelas base com os tipos SQLite. O [DER PostgreSQL editável](DER_Dieta_Facil_PostgreSQL.drawio) mostra os tipos da entrega acadêmica e inclui a tabela de histórico. A [estrutura PostgreSQL](../postgresql/01_ddl_estrutura.sql) e o [script de programação avançada](../postgresql/03_programacao_avancada.sql) detalham as restrições e a criação do histórico.
 
 ## Decisões de modelagem
 
 - O MER não lista atributos. Campos foram detalhados a partir do domínio e dos requisitos publicados do Dieta Fácil.
 - Cada cardápio tem um dono. Uma refeição pode pertencer a um cardápio ou ser avulsa. Cada registro aponta para uma refeição exclusiva. Ao carregar um modelo para outro dia, a aplicação deve copiar a refeição e seus itens para registrar uma nova ocorrência.
 - A tabela mensagem referencia diretamente o usuário comum e o nutricionista. A FK composta (vinculo_id, comum_id, nutricionista_id) garante que ambos são os participantes do vínculo informado. A origem indica qual participante enviou a mensagem. O par pode ter um vínculo persistente com data de encerramento. Cada vínculo admite uma avaliação e várias medições.
-- Meta e agenda usam chave primária compartilhada. O SQL assegura no máximo uma meta por usuário comum e uma agenda por nutricionista. A existência do perfil, a exclusividade entre perfis e os mínimos do MER do lado pai, como ter agenda ou itens na refeição, dependem do fluxo de criação.
-- Até a etapa avançada, autorização, consistência entre o dono do registro e o do cardápio, uso de alimentos privados, vínculo ativo e sobreposição de consultas exigem validação na aplicação. Editar um alimento pode alterar totais calculados de registros anteriores, pois a carga usa referências ao catálogo.
-- Instantes são TEXT no formato UTC AAAA-MM-DD HH:MM:SS. A aplicação deve normalizar entradas para que ordenação e comparação textual sejam cronológicas. A collation NOCASE do SQLite ignora caixa apenas para ASCII.
+- Meta e agenda usam chave primária compartilhada. O SQL assegura no máximo uma meta por usuário comum e uma agenda por nutricionista. A existência da agenda e a exclusividade entre perfis dependem do fluxo de criação. Um registro definitivo deve ter ao menos um item. O PostgreSQL valida essa regra ao final da transação.
+- As procedures validam propriedade da refeição e acesso a alimentos privados nos fluxos do diário. O backend identifica o usuário pela sessão autenticada. A aplicação ainda precisa validar vínculo ativo e sobreposição de consultas. Editar um alimento pode alterar totais calculados de registros anteriores, pois a carga usa referências ao catálogo.
+- No PostgreSQL, instantes usam TIMESTAMPTZ e datas civis usam DATE. No SQLite, instantes são TEXT no formato UTC AAAA-MM-DD HH:MM:SS. A aplicação deve normalizar entradas para que ordenação e comparação textual sejam cronológicas. A collation NOCASE do SQLite ignora caixa apenas para ASCII.
 
 ## Normalização até a 3FN
 
 - **1FN**. Cada coluna armazena um valor escalar. Refeições, alimentos consumidos, mensagens, avaliações e medições ocupam linhas próprias.
-- **2FN**. Em alimento_consumido, cada lançamento tem seu próprio ID. A mesma refeição pode ter várias entradas para o mesmo alimento, cada uma com sua quantidade. As PKs são de uma coluna. O par comum–nutricionista também identifica unicamente um vínculo.
-- **3FN**. Os dados da conta ficam em usuário, o CRN no perfil profissional e os nutrientes no catálogo. Os itens não copiam nutrientes nem a unidade. Mensagem é a exceção deliberada à 3FN: repete os IDs dos participantes para buscar por usuário ou nutricionista diretamente, com índice por participante e data. A FK composta impede divergência com o vínculo. O registro guarda seu próprio usuário para comportar refeições avulsas. A consulta guarda a agenda e aponta ao vínculo pelo par paciente–profissional.
+- **2FN**. Em alimento_consumido, cada lançamento tem seu próprio ID. A mesma refeição pode ter várias entradas para o mesmo alimento, cada uma com sua quantidade. As PKs das tabelas PostgreSQL são de uma coluna. O par comum–nutricionista também identifica unicamente um vínculo.
+- **3FN**. Os dados da conta ficam em usuário, o CRN no perfil profissional e os nutrientes no catálogo. Os itens não copiam nutrientes nem a unidade. Mensagem é a exceção deliberada à 3FN: repete os IDs dos participantes para buscar por usuário ou nutricionista diretamente, com índice por participante e data. A FK composta impede divergência com o vínculo. O registro guarda seu próprio usuário para comportar refeições avulsas. A consulta referencia uma agenda e um vínculo coerente com o par paciente–profissional. O histórico usa instantâneos JSONB para preservar o conteúdo de cada evento, incluindo os lançamentos que podem ser removidos depois.
 
 ## Ações referenciais
 
 - ON UPDATE RESTRICT preserva os identificadores referenciados. ON DELETE CASCADE remove perfis, meta, agenda ou itens de refeição quando são dependências diretas e as outras referências permitem a exclusão.
 - ON DELETE RESTRICT protege referências históricas e compartilhadas de registros, consultas, vínculos, avaliações, medições, mensagens, cardápios e alimentos.
 
-## Dicionário de dados
+## Justificativa dos recursos avançados
 
-Campos sem a marca de obrigatoriedade aceitam NULL. PKs INTEGER identificam linhas e podem ser geradas pelo SQLite. A tabela consulta tem uma FK de duas colunas para vinculo_paciente(comum_id, nutricionista_id). Esse par é UNIQUE. Em mensagem, a FK de três colunas aponta para a chave UNIQUE (id, comum_id, nutricionista_id) de vinculo_paciente.
+| Recurso | Responsabilidade e justificativa |
+| --- | --- |
+| Procedures de registro, alteração e exclusão | Agrupam escritas do diário, verificam o acesso conforme o fluxo e devolvem o ID do registro. Um erro desfaz as alterações da chamada. A edição registra um evento por alteração efetiva. |
+| Função de calorias por lançamento | Aplica a mesma proporção em consultas e relatórios, preservando precisão antes da soma. A view PostgreSQL reutiliza a função. |
+| Função de meta calórica | Centraliza a fórmula revisada de Harris-Benedict nas consultas PostgreSQL. O cálculo existente em Kotlin permite uso offline. |
+| View de consumo diário | Agrega cinco tabelas por usuário e dia UTC. O HAVING mantém dias com pelo menos um lançamento. Os totais são comparados com a meta vigente. |
+| View de agenda | Reúne paciente, nutricionista, horários e status. O backend aplica as permissões conforme a sessão. |
+| Gatilho de auditoria de exclusão | Captura o nome, a data e os itens antes que sejam removidos. O evento participa da mesma transação da exclusão. |
+| Gatilhos de integridade do diário | Impedem que um registro fique sem alimentos. O PostgreSQL verifica o estado final da transação. O SQLite aplica a regra imediatamente. |
 
-### `usuario`
+O [guia PostgreSQL](../postgresql/README.md) detalha assinaturas, permissões e exemplos. O [catálogo de erros](../ERROS.md) registra os códigos SQLSTATE `P1001` a `P1013`.
 
-Conta e identidade de acesso.
+## Índices e evidências
 
-| Coluna | Tipo | Restrições | Significado |
-|---|---|---|---|
-| `id` | INTEGER | PK, NOT NULL | Identificador da linha. |
-| `nome` | TEXT | NOT NULL, `CHECK (length(trim(nome)) > 0)` | Nome exibido. |
-| `nome_usuario` | TEXT | NOT NULL, UNIQUE, COLLATE NOCASE | Identificador público de acesso. |
-| `email` | TEXT | NOT NULL, UNIQUE, COLLATE NOCASE | Endereço de e-mail da conta. |
-| `senha_hash` | TEXT | NOT NULL | Verificador de senha produzido pela aplicação. |
-| `email_verificado_em` | TEXT | — | Instante da confirmação de e-mail. |
+| Índice | Consulta que atende |
+| --- | --- |
+| `idx_item_refeicao` | Consultar lançamentos de uma refeição. |
+| `idx_alimento_nome` | Buscar um nome exato sem distinguir maiúsculas e minúsculas, usando `lower(nome)`. |
+| `idx_registro_comum_data` | Ler o diário por usuário e intervalo de datas. |
+| `idx_mensagem_comum_data` | Consultar mensagens por usuário comum e data. |
+| `idx_mensagem_nutricionista_data` | Consultar mensagens por nutricionista e data. |
+| `idx_mensagem_vinculo_data` | Consultar uma conversa por vínculo e data. |
 
-### `comum`
+O [script 04](../postgresql/04_testes_e_transacoes.sql) executa as seis consultas com `EXPLAIN (ANALYZE, BUFFERS)`. Na [execução registrada em PostgreSQL 18.7 para Windows](../postgresql/evidencias-postgresql-18.7.txt), os seis índices apareceram nos planos. Em uma repetição com a carga pequena no Docker, o PostgreSQL escolheu uma varredura sequencial para a consulta de itens. A decisão depende das estatísticas e do custo estimado.
 
-Perfil de usuário comum.
+## Testes transacionais e execução
 
-| Coluna | Tipo | Restrições | Significado |
-|---|---|---|---|
-| `usuario_id` | INTEGER | PK, NOT NULL, FK → `usuario.id` | Identidade da conta que possui o perfil. |
+1. **Último alimento.** O gatilho devolve `P1013` quando a remoção deixaria uma refeição registrada vazia. O teste verifica que o item foi restaurado e que uma edição válida pode manter duas porções separadas.
+2. **Exclusão e auditoria.** Uma tentativa de acesso por outro usuário devolve `P1001`. Depois de uma exclusão válida, uma falha simulada restaura o diário e os itens e desfaz o evento de auditoria.
 
-### `nutricionista`
+Os scripts 01 a 04 foram executados no PostgreSQL 18.7 nativo e no Docker. A carga fictícia do PostgreSQL contém 40 usuários, 20 registros e 60 lançamentos. O [README da entrega](../README.md) orienta a execução em SQLite, PostgreSQL e Docker. O [roteiro para o vídeo](../postgresql/roteiro_video.sql) demonstra um exemplo de cada recurso.
 
-Perfil profissional vinculado à conta.
-
-| Coluna | Tipo | Restrições | Significado |
-|---|---|---|---|
-| `usuario_id` | INTEGER | PK, NOT NULL, FK → `usuario.id` | Identidade da conta que possui o perfil. |
-| `crn` | TEXT | NOT NULL, UNIQUE | Registro profissional no conselho de nutrição. |
-| `descricao` | TEXT | — | Texto de apresentação do profissional. |
-| `endereco_trabalho` | TEXT | NOT NULL, `CHECK (length(trim(endereco_trabalho)) > 0)` | Endereço profissional. |
-
-### `meta`
-
-Meta calórica vigente e parâmetros biométricos declarados.
-
-| Coluna | Tipo | Restrições | Significado |
-|---|---|---|---|
-| `comum_id` | INTEGER | PK, NOT NULL, FK → `comum.usuario_id` | Usuário comum responsável ou paciente da relação. |
-| `calorias_diarias` | REAL | NOT NULL, `CHECK (calorias_diarias > 0)` | Meta diária em kcal. |
-| `sexo` | TEXT | — | Parâmetro biométrico declarado. |
-| `data_nascimento` | TEXT | — | Data de nascimento no formato AAAA-MM-DD. |
-| `altura_cm` | REAL | `CHECK (altura_cm > 0)` | Altura em centímetros. |
-| `peso_atual_kg` | REAL | `CHECK (peso_atual_kg > 0)` | Peso informado em kg. |
-| `peso_meta_kg` | REAL | `CHECK (peso_meta_kg > 0)` | Peso desejado em kg. |
-| `nivel_atividade` | TEXT | — | Nível de atividade declarado. |
-
-### `cardapio`
-
-Conjunto de refeições do usuário comum.
-
-| Coluna | Tipo | Restrições | Significado |
-|---|---|---|---|
-| `id` | INTEGER | PK, NOT NULL | Identificador da linha. |
-| `comum_id` | INTEGER | NOT NULL, FK → `comum.usuario_id` | Usuário comum responsável ou paciente da relação. |
-| `nome` | TEXT | NOT NULL | Nome exibido. |
-| `categoria` | TEXT | — | Categoria atribuída ao cardápio. |
-| `criado_em` | TEXT | NOT NULL, DEFAULT `CURRENT_TIMESTAMP` | Instante da criação. |
-
-### `refeicao`
-
-Refeição de cardápio ou refeição avulsa.
-
-| Coluna | Tipo | Restrições | Significado |
-|---|---|---|---|
-| `id` | INTEGER | PK, NOT NULL | Identificador da linha. |
-| `cardapio_id` | INTEGER | FK → `cardapio.id` | Cardápio ao qual a refeição pertence, se houver. |
-| `nome` | TEXT | NOT NULL | Nome exibido. |
-
-### `registro`
-
-Lançamento de uma refeição no diário alimentar.
-
-| Coluna | Tipo | Restrições | Significado |
-|---|---|---|---|
-| `id` | INTEGER | PK, NOT NULL | Identificador da linha. |
-| `comum_id` | INTEGER | NOT NULL, FK → `comum.usuario_id` | Usuário comum responsável ou paciente da relação. |
-| `refeicao_id` | INTEGER | NOT NULL, UNIQUE, FK → `refeicao.id` | Refeição referenciada. |
-| `registrado_em` | TEXT | NOT NULL, DEFAULT `CURRENT_TIMESTAMP` | Instante do lançamento alimentar. |
-
-### `alimento`
-
-Catálogo nutricional geral ou alimento personalizado.
-
-| Coluna | Tipo | Restrições | Significado |
-|---|---|---|---|
-| `id` | INTEGER | PK, NOT NULL | Identificador da linha. |
-| `comum_id` | INTEGER | FK → `comum.usuario_id` | Dono do alimento personalizado. NULL identifica alimento compartilhado. |
-| `nome` | TEXT | NOT NULL, COLLATE NOCASE | Nome exibido. |
-| `unidade_base` | TEXT | NOT NULL, `CHECK (unidade_base IN ('g', 'ml'))` | Unidade usada pelo alimento e pela quantidade consumida. |
-| `kcal_por_100` | REAL | NOT NULL, `CHECK (kcal_por_100 >= 0)` | Energia por 100 unidades-base. |
-| `proteinas_g_por_100` | REAL | NOT NULL, `CHECK (proteinas_g_por_100 >= 0)` | Proteínas em gramas por 100 unidades-base. |
-| `carboidratos_g_por_100` | REAL | NOT NULL, `CHECK (carboidratos_g_por_100 >= 0)` | Carboidratos em gramas por 100 unidades-base. |
-| `gorduras_g_por_100` | REAL | NOT NULL, `CHECK (gorduras_g_por_100 >= 0)` | Gorduras em gramas por 100 unidades-base. |
-
-### `alimento_consumido`
-
-Item da refeição com quantidade na unidade-base do alimento.
-
-| Coluna | Tipo | Restrições | Significado |
-|---|---|---|---|
-| `id` | INTEGER | PK, NOT NULL | Identificador da linha. |
-| `refeicao_id` | INTEGER | NOT NULL, FK → `refeicao.id` | Refeição referenciada. |
-| `alimento_id` | INTEGER | NOT NULL, FK → `alimento.id` | Identificador do alimento do catálogo. |
-| `quantidade` | REAL | NOT NULL, `CHECK (quantidade > 0)` | Quantidade em g ou ml, conforme a unidade do alimento. |
-
-### `vinculo_paciente`
-
-Relação de atendimento entre paciente e nutricionista.
-
-| Coluna | Tipo | Restrições | Significado |
-|---|---|---|---|
-| `id` | INTEGER | PK, NOT NULL | Identificador da linha. |
-| `comum_id` | INTEGER | NOT NULL, FK → `comum.usuario_id` | Usuário comum responsável ou paciente da relação. |
-| `nutricionista_id` | INTEGER | NOT NULL, FK → `nutricionista.usuario_id` | Identificador do profissional. |
-| `criado_em` | TEXT | NOT NULL, DEFAULT `CURRENT_TIMESTAMP` | Instante da criação. |
-| `encerrado_em` | TEXT | — | Instante de encerramento do vínculo, se houver. |
-
-### `mensagem`
-
-Mensagem enviada por uma das partes do vínculo.
-
-| Coluna | Tipo | Restrições | Significado |
-|---|---|---|---|
-| `id` | INTEGER | PK, NOT NULL | Identificador da linha. |
-| `vinculo_id` | INTEGER | NOT NULL, FK → `vinculo_paciente.id` | Atendimento que dá contexto à linha. |
-| `comum_id` | INTEGER | NOT NULL, FK → `vinculo_paciente.comum_id` + `comum.usuario_id` | Usuário comum responsável ou paciente da relação. |
-| `nutricionista_id` | INTEGER | NOT NULL, FK → `vinculo_paciente.nutricionista_id` + `nutricionista.usuario_id` | Identificador do profissional. |
-| `origem` | TEXT | NOT NULL, `CHECK (origem IN ('comum', 'nutricionista'))` | Perfil que enviou a mensagem no vínculo. |
-| `corpo` | TEXT | NOT NULL, `CHECK (length(trim(corpo)) > 0)` | Texto da mensagem. |
-| `enviada_em` | TEXT | NOT NULL, DEFAULT `CURRENT_TIMESTAMP` | Instante do envio. |
-
-### `avaliacao`
-
-Avaliação do atendimento pelo paciente do vínculo.
-
-| Coluna | Tipo | Restrições | Significado |
-|---|---|---|---|
-| `vinculo_id` | INTEGER | PK, NOT NULL, FK → `vinculo_paciente.id` | Atendimento que dá contexto à linha. |
-| `nota` | INTEGER | NOT NULL, `CHECK (nota BETWEEN 1 AND 5)` | Nota inteira da avaliação. |
-| `comentario` | TEXT | — | Comentário de avaliação. |
-| `criada_em` | TEXT | NOT NULL, DEFAULT `CURRENT_TIMESTAMP` | Instante da avaliação. |
-
-### `resultado_bioimpedancia`
-
-Medição corporal associada ao atendimento.
-
-| Coluna | Tipo | Restrições | Significado |
-|---|---|---|---|
-| `id` | INTEGER | PK, NOT NULL | Identificador da linha. |
-| `vinculo_id` | INTEGER | NOT NULL, FK → `vinculo_paciente.id` | Atendimento que dá contexto à linha. |
-| `medido_em` | TEXT | NOT NULL | Instante da medição. |
-| `peso_kg` | REAL | NOT NULL, `CHECK (peso_kg > 0)` | Peso medido em kg. |
-| `gordura_percentual` | REAL | `CHECK (gordura_percentual BETWEEN 0 AND 100)` | Percentual de gordura corporal. |
-
-### `agenda`
-
-Agenda individual do nutricionista.
-
-| Coluna | Tipo | Restrições | Significado |
-|---|---|---|---|
-| `nutricionista_id` | INTEGER | PK, NOT NULL, FK → `nutricionista.usuario_id` | Identificador do profissional. |
-
-### `consulta`
-
-Atendimento agendado para um par paciente–nutricionista.
-
-| Coluna | Tipo | Restrições | Significado |
-|---|---|---|---|
-| `id` | INTEGER | PK, NOT NULL | Identificador da linha. |
-| `nutricionista_id` | INTEGER | NOT NULL, FK → `vinculo_paciente.nutricionista_id` + `agenda.nutricionista_id` | Identificador do profissional. |
-| `paciente_id` | INTEGER | NOT NULL, FK → `vinculo_paciente.comum_id` | Usuário comum atendido. |
-| `inicio_em` | TEXT | NOT NULL | Instante de início da consulta. |
-| `fim_em` | TEXT | NOT NULL, `CHECK (fim_em > inicio_em)` | Instante de término da consulta. |
-| `status` | TEXT | NOT NULL, DEFAULT `'agendada'`, `CHECK (status IN ('agendada', 'realizada', 'cancelada'))` | Estado da consulta. |
-
-## Índices e planos medidos
-
-Cada índice foi medido com EXPLAIN QUERY PLAN na carga de demonstração. Os compostos começam pela igualdade e seguem pela data usada na leitura ordenada.
-
-**Itens de uma refeição**
-
-```sql
-EXPLAIN QUERY PLAN SELECT id, quantidade FROM alimento_consumido WHERE refeicao_id = 1 ORDER BY id;
-```
-
-Plano observado · `SEARCH alimento_consumido USING INDEX idx_item_refeicao (refeicao_id=?)`
-
-**Busca offline de alimento por nome**
-
-```sql
-EXPLAIN QUERY PLAN SELECT id, nome FROM alimento WHERE nome = 'Banana';
-```
-
-Plano observado · `SEARCH alimento USING COVERING INDEX idx_alimento_nome (nome=?)`
-
-**Histórico alimentar por pessoa e intervalo**
-
-```sql
-EXPLAIN QUERY PLAN SELECT id, registrado_em FROM registro WHERE comum_id = 1 AND registrado_em >= '2026-11-01' ORDER BY registrado_em;
-```
-
-Plano observado · `SEARCH registro USING COVERING INDEX idx_registro_comum_data (comum_id=? AND registrado_em>?)`
-
-**Mensagens por usuário comum**
-
-```sql
-EXPLAIN QUERY PLAN SELECT enviada_em, corpo FROM mensagem WHERE comum_id = 1 ORDER BY enviada_em;
-```
-
-Plano observado · `SEARCH mensagem USING INDEX idx_mensagem_comum_data (comum_id=?)`
-
-**Mensagens por nutricionista**
-
-```sql
-EXPLAIN QUERY PLAN SELECT enviada_em, corpo FROM mensagem WHERE nutricionista_id = 21 ORDER BY enviada_em;
-```
-
-Plano observado · `SEARCH mensagem USING INDEX idx_mensagem_nutricionista_data (nutricionista_id=?)`
-
-**Sequência de mensagens de um vínculo**
-
-```sql
-EXPLAIN QUERY PLAN SELECT enviada_em, corpo FROM mensagem WHERE vinculo_id = 1 ORDER BY enviada_em;
-```
-
-Plano observado · `SEARCH mensagem USING INDEX idx_mensagem_vinculo_data (vinculo_id=?)`
-
-## Execução no Windows
-
-O arquivo **dieta_facil_demo.db** já está pronto para abrir. No PowerShell, dentro da pasta dos arquivos, execute `py -3 criar_banco.py outro_banco.db` com Python 3.11+ e SQLite 3.37+. Use `--somente-estrutura` para gerar um banco vazio. Se o destino já existir, escolha outro nome.
-
-Com o cliente SQLite 3.37+, abra o banco com `sqlite3 dieta_facil_demo.db` e use `.tables` para listar as tabelas. Em cada conexão da aplicação ou do cliente, habilite `PRAGMA foreign_keys = ON;` antes de escrever. Para executar manualmente em um banco vazio no cliente SQLite, use `.read 01_ddl_estrutura.sql` e depois `.read 02_dml_carga_inicial.sql`.
-
-Os dados são fictícios. As contas de exemplo têm login desabilitado e os nutrientes são ilustrativos.
-
-## Entrega acadêmica
-
-- Prontos para revisão: DER, dicionário, justificativa de normalização, estrutura, carga e planos dos índices.
-- Os dois cenários transacionais e os planos PostgreSQL estão no script 04, testado no PGlite. A sequência 01 a 04 foi executada no PostgreSQL 18.7 nativo para Windows. As [evidências PostgreSQL](../postgresql/evidencias-postgresql-18.7.txt) integram a entrega. As três procedures nativas e as duas funções de calorias e meta estão no script 03 PostgreSQL. As views de consumo diário e de agenda estão no script 03 dos dois bancos. O script 03 de cada banco cria o histórico de exclusão e aplica a regra de pelo menos um item nas refeições registradas. No PostgreSQL, a procedure de edição também grava alterações no histórico. O DER base representa as 15 tabelas do script 01. O guia PostgreSQL descreve a tabela adicional de histórico. O registro definitivo pela procedure exige pelo menos um lançamento. SQLite permanece como base local.
-- Após implementar e verificar a etapa avançada, juntar a contextualização pronta, os scripts 03 e 04, as evidências e os slides ao pacote único. A ata de auditoria deve ser preenchida durante a arguição com perguntas, respostas e julgamento técnico.
-
-[Requisitos funcionais publicados](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/main/docs/requisitos/Requisitos%20Funcionais.md) · [EXPLAIN QUERY PLAN](https://sqlite.org/eqp.html)
+[Requisitos funcionais publicados](https://github.com/Organizacao-Dieta-Facil/Dieta_Facil/blob/d04fc50/docs/requisitos/Requisitos%20Funcionais.md)
